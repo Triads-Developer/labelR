@@ -16,7 +16,6 @@
 #' @author Ryden Butler
 #'
 #' @rdname listify
-#' @export
 
 listify <- function(nested_list){
   paste(sapply(nested_list, function(x){

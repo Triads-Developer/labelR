@@ -33,8 +33,8 @@ devtools::install_github("RydenButler/labelR")
 
 ## Tutorial
 
-This tutorial provides a complete walkthrough of how to use labelR to
-conduct pairwise data labeling on MTurk. It assumes that you have both a
+This tutorial provides a complete walkthrough for using labelR to
+conduct pairwise data labeling on MTurk. It assumes that you have a
 basic level of understanding about both MTurk and R. The tutorial begins
 by demonstrating how to create a worker qualification and corresponding
 qualification test that will permit only authorized workers to complete
@@ -47,10 +47,10 @@ the labeled results, and check worker quality.
 ### Before using labelR
 
 labelR depends on the pyMTurkR package. The package allows for R to
-interface with MTurk through using python code. As such, you will need
-to follow the more-complicated-than-usual installation instructions
-provided in [its github repo](https://github.com/cloudyr/pyMTurkR) so
-that R and python will play nicely together.
+interface with MTurk using python code. As such, you will need to follow
+the more-complicated-than-usual installation instructions provided in
+[its github repo](https://github.com/cloudyr/pyMTurkR) so that R and
+python will play nicely together.
 
 ### Getting started
 
@@ -76,25 +76,33 @@ Store your access key and secret in the R session so that they can be
 accessed by pyMTurkR throughout. For this tutorial, and while testing
 out the system, you should remain in sandbox mode by keeping
 pyMTurkR.sandbox = T. You should always run pyMTurkR::AccountBalance()
-before sending HITs to MTurk to verfiy whether you are in sandbox mode.
-If you can execute the code below without error, you are ready to begin
+before sending HITs to MTurk to verfiy whether you are in sandbox mode
+(your balance in sandbox mode is always $10,000.00). If you can execute
+the code below without error, you are ready to begin
 
 ``` r
 Sys.setenv(AWS_ACCESS_KEY_ID = access_key)
 Sys.setenv(AWS_SECRET_ACCESS_KEY = secret_key)
-options(pyMTurkR.sandbox = T) # Change sandbox = F when ready to run on MTurk
+options(pyMTurkR.sandbox = T) # Change sandbox = F when ready to send real HITs to workers
 pyMTurkR::AccountBalance() # Test that your pyMturkR settings are correct
 # When in sandbox mode, your balance will be $10,000.00
 # When not in sandbox mode, your balance will reflect the pre-paid funds in your account
 ```
 
 > ***A note on sandbox mode*** MTurk offers a sandbox mode for testing
-> out your HITs before committing to pay for the work. There is both a
-> requester sandbox, where you can test formatting and sending HITs, as
+> your HITs before committing to pay for the work. There is both a
+> requester sandbox, where you can try formatting and sending HITs, as
 > well as a worker sandbox, where you can view your HITs as the workers
 > will see them. This is helpful for testing out your qualification
 > tests, which can only be fully rendered when accessing the link
-> through a posted HIT.
+> through a posted HIT. The HIT and qualification templates you create
+> in the sandbox will not carry over to your MTurk requester profile
+> outside of the sandbox. This means that you can experiment without
+> fear while in sandbox mode, but will need to manually re-create the
+> desired templating in your requester account when done testing in
+> sandbox. labelR’s formatting functions help ease the transition from
+> sandbox mode to the live MTurk platform, as formatting files are saved
+> in the R environment and to disk.
 
 ### Making a Qualification with a Test
 
@@ -108,7 +116,7 @@ test and its answer key are supplied to MTurk in XML format. To spare
 users from writing XML code, labelR uses a series of functions whereby
 users can pass in HTML-formatted strings which will be automatically
 written to the XML files. Users should use the formatTest function with
-apporopriately supplied inputs to automatically generate the XML files
+appropriately supplied inputs to automatically generate the XML files
 for the qualification test and answer key.
 
 Some of the inputs to formatTest can be unintuitive. An object
@@ -254,7 +262,7 @@ The practice\_questions argument also takes a nested list object with a
 particular format. It contains the contents of example questions offered
 as guidance for workers in the qualification test. The primary list
 contains a series of sub-lists, one for each practice question. Each
-sub-list is comprised of three elements. The first and second element
+sub-list is comprised of three elements. The first and second elements
 are strings, which contain the texts for documents 1 and 2 of a pairwise
 comparison, respectively. The third element is a string containing
 explanatory text that indicates which document the worker should select
@@ -309,7 +317,7 @@ that used in practice\_questions. It contains the contents of test
 questions used to evaluate whether workers pass your qualification test.
 As before, the primary list contains a series of sub-lists, one for each
 test question. Each sub-list is comprised of three elements. The first
-and second element are strings, which contain the texts for documents 1
+and second elements are strings, which contain the texts for documents 1
 and 2 of a pairwise comparison, respectively. The third element is a
 numeric integer indicating which element of the list is the correct
 answer.
@@ -350,7 +358,7 @@ TestQuestions = list(
 ```
 
 When the correctly-formatted arguments are supplied to formatTest, the
-function writes two XML files corresponding to the qualificaition test
+function writes two XML files corresponding to the qualification test
 code and the answer key code. These files are both returned from the
 function call and written to your working directory as QualTest.xml and
 AnswerKey.xml. The .xml files can be manually edited to change the
@@ -375,19 +383,19 @@ Otherwise, if using the default files generated from formatTest, you can
 access the files directly from the object to which formatTest’s output
 is assigned.
 
-With a properly formatted qualificaiton test test and answer key, you
-are ready to create a qualification with the desired properties. The
-below code accomplishes this using pyMTurkR::CreateQualificationType. It
-take the following arguments: name, a string which provides a title for
-the qualification that is visible to both you and to workers;
-description, a string explaining the purpose of the qualification;
-status, a string indicating whether the qualification should be active
-(use this) or inactive; test and answer key, which take the
-XML-formatted strings created from formatTest; test.duration, a numeric
-integer that governs the time (in seconds) in which workers are allowed
-to complete the test; and retry.delay, a numeric integer determining how
-long workers have to wait to retake the test (when NULL, workers may not
-ever retake the
+With a properly formatted qualification test and answer key, you are
+ready to create a qualification with the desired properties. The below
+code accomplishes this using pyMTurkR::CreateQualificationType. It takes
+the following arguments: name, a string which provides a title for the
+qualification that is visible to both you and to workers; description, a
+string explaining the purpose of the qualification; status, a string
+indicating whether the qualification should be active (I recommend using
+this) or inactive; test and answer key, which take the XML-formatted
+strings created from formatTest; test.duration, a numeric integer that
+governs the time (in seconds) in which workers are allowed to complete
+the test; and retry.delay, a numeric integer determining how long
+workers have to wait to retake the test (when NULL, workers may not ever
+retake the
 test).
 
 ``` r
@@ -401,6 +409,28 @@ QualificationWithTest <- CreateQualificationType(name = 'Compare Senate Ads',
                                                  test.duration = 60 * 60, 
                                                  retry.delay = NULL)
 ```
+
+To view your qualification test, you will need to access it from a
+created HIT. To do so, first make sure that you are in sandbox mode.
+Second, follow the instructions below on how to create a HIT. When
+creating the HIT in the MTurk dashboard, make sure to include your
+custom qualification among the qualifications required to complete your
+HIT. Third, post the HIT (a single HIT is sufficient) to MTurk’s sandbox
+environment. Fourth, log into the sandbox as a worker, and search for
+the HIT you posted. In the information displaye for that HIT will be a
+link to the qualification test. Fifth, click on the link and inspect
+your qualification test.
+
+If you want to revise and re-inspect your qualification test, you can
+use the pyMTurkR::UpdateQualificationType function to implement the
+desired setting changes for the test. Depending on your HIT settings,
+you may need to manually revoke the qualification from your sandbox
+worker account using the pyMTurkR::RevokeQualification function in order
+to retry the test. Your sandbox worker id is available in the header of
+the MTurk dashboard when you are logged into the worker sandbox. You may
+also want to temporarily allow retakes of your test while experimenting
+with formatting, even if you will ultimately disallow retakes when
+posting live HITs outside of the sandbox.
 
 ### Making a HIT
 
@@ -422,13 +452,13 @@ their task. Remember, any workers participating in your HITs has
 completed training through your qualification test, and so should be
 familiar with the task at hand. As such, the question prompt can be
 reduced from its form in the qualification test if desired. The
-short\_instruction\_list argument take another specially-formatted list
+short\_instruction\_list argument takes another specially-formatted list
 object. The object’s content will render brief instructions in a
-left-hand sidebar next to eahc pariwise comparison. The brief
+left-hand sidebar next to each pariwise comparison. The brief
 instructions will appear as a bulleted list (of dashes) containing
 simplified instruction or examples. Each element of the primary list is
 a sub-list. The first element of the sub-list is a string that will be
-rendered as a sub-title (a HTML h3 tag) in the list. this can be left
+rendered as a sub-title (HTML h3 tag) in the list. This can be left
 blank using empty quotes. Subsequent elements of the sub-list are
 strings, each of which will receive a separate bullet (dash). An
 example, also available in Text object found in data(“Text”), is shown
@@ -458,15 +488,15 @@ so that workers receive consistent instructions throughout.
 Similar to formatTest, formatHIT will return the HTML-formatted string
 within R as well as write a HIT.html file to your working directory. You
 can view the fully rendered HIT as it will appear to workers by opening
-the .html file using a web browser. You can edit further edit the HIT’s
-HTML code manually by opening the .html file using a text editor.
+the .html file using a web browser. You can further edit the HIT’s HTML
+code manually by opening the .html file using a text editor.
 
 To create the HIT on MTurk, it is recommended that you sign into the
 MTurk website as a requester, navigate to the Create tab, click New
 Project, and select Item Equality from the left sidebar for the default
-task setup. On the first page of the HIT setup you can specify how the
+task setup. On the first page of the HIT setup you can specify the
 title, description, price, and duration of your HITs, as well as apply
-your custom qualification by selectign it from the drop-down menu
+your custom qualification by selecting it from the drop-down menu
 populated by pressing the “(+) Add another criterion” button. For the
 second page of the HIT setup, you should copy the complete contents of
 your HIT.html file and paste it to fill the entire page of formatting
@@ -502,6 +532,7 @@ MTurk.
 ``` r
 n_docs <- 4 # number of example documents
 n_comparisons <- 2 # number of comparisons
+n_comparisons_per_doc <- 2
 # create the documents
 Documents <- data.frame(doc_ids = 1:n_docs,
                         doc_text = paste('test document', 1:n_docs))
@@ -548,12 +579,12 @@ function will continuously run in the R console providing live updates
 on the percentage of completed work until all work is complete and the
 full results are downloaded. When FALSE, the function will execute once,
 printing the percentage of completed results and downloading those
-results. The retry\_in\_seconds argument takes a number integer that
+results. The retry\_in\_seconds argument takes a numeric integer that
 governs how long (in seconds) the function should wait before trying to
 download the results again.
 
 ``` r
-Results <- getResults(current_batch_id = batch_ids[i],
+Results <- getResults(current_batch_id = batch_id,
                       current_hit_ids = current_HITs, 
                       current_document_ids = CompareDocs,
                       retry = T, 
@@ -568,7 +599,7 @@ quality. The specifics of this method are available in the function’s
 documentation. The auditWorkers function takes one primary argument,
 current\_experiment\_results, which takes a data.frame as formatted by
 the getResults function. The function prints, for each worker, an MTurk
-id, a posterior mean from sentimentIt::fitStan, and the number of HITs
+ID, a posterior mean from sentimentIt::fitStan, and the number of HITs
 they completed. There is also an optional argument, reference\_results,
 which takes a similarly formatted data.frame, but which contains “gold
 standard” comparisons that you know are correct. Supplying this argument
@@ -608,9 +639,9 @@ corresponding package documentation.
 > received for rejecting literal pennies worth of work — is to run many
 > batches of small numbers of HITs (say, 100) and to audit worker
 > quality after each batch. Instead of rejecting bad work, merely revoke
-> your custom qualification from bad workers. As long as you set the
-> qualification test to prevent retakes, this will prevent bad workers
-> from affecting your results as soon as your diagnostics flag them as
-> providing low quality work. Whatever fractions of a dollar they earned
-> by spamming your HITs is simply the price you pay for a good night’s
-> sleep.
+> your custom qualification from bad workers and purge their HTIs from
+> your results. As long as you set the qualification test to prevent
+> retakes, this will prevent bad workers from affecting your results as
+> soon as your diagnostics flag them as providing low quality work.
+> Whatever fractions of a dollar they earned by spamming your HITs is
+> simply the price you pay for a good night’s sleep.

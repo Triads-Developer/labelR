@@ -440,11 +440,13 @@ comparisons to workers. The HIT template is constructed with HTML code,
 which can be automatically formatted using the formatHIT function.
 
 ``` r
+# if Text is not yet loaded...
+#data("Text")
 HIT_code <- formatHIT(question_prompt = 'Which ad is most negative?',
-                      short_instruction_list = ShortInstructions,
-                      instruction_overview = InstructionOverview,
-                      instruction_list = InstructionList,
-                      closing_message = ClosingMessage)
+                      short_instruction_list = Text$ShortInstructions,
+                      instruction_overview = Text$InstructionOverview,
+                      instruction_list = Text$InstructionList,
+                      closing_message = Text$ClosingMessage)
 ```
 
 The question\_prompt argument take a string that reminds workers of
@@ -543,8 +545,8 @@ CompareDocs <- matrix(sample(x = Documents$doc_ids,
 # assign pairwise comparisons by doc text
 Comparisons <- t(apply(CompareDocs, 1, function(x) Documents$doc_text[x]))
 
-current_HITs <- sendComparisons(hit_type = '3W850VB9FSF0KVMX3N9YBOT3XV3K1W', # HIT type id from MTurk requester dashboard
-                                hit_layout = '38X1F3X9FX9TJLGJJRSPLUQ2YXJY5C', # HIT layout id from MTurk requester dashboard
+current_HITs <- sendComparisons(hit_type = '123XYZ', # HIT type id from MTurk requester dashboard
+                                hit_layout = 'ABC500', # HIT layout id from MTurk requester dashboard
                                 comparisons_to_send = Comparisons)
 ```
 

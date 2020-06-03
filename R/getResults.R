@@ -22,7 +22,8 @@
 #' @details
 #' The function retrieves and formats labeled data from MTurk.
 #'
-#' @return A data.frame of results from MTurk.
+#' @return A list containing a data.frame of results from MTurk and a vector of 
+#' HIT ids of incomplete HITs.
 #'
 #' @author Ryden Butler
 #'
@@ -36,13 +37,6 @@ getResults <- function(current_hit_ids,
                        retry = T,
                        retry_in_seconds = 60,
                        hit_categories = c('Document 1', 'Document 2')){
-
-  # check that amazon credentials & sandbox settings apply
-  # if(nchar(Sys.getenv("AWS_ACCESS_KEY_ID")) == 0){
-  #   Sys.setenv(AWS_ACCESS_KEY_ID = AWS_id)
-  #   Sys.setenv(AWS_SECRET_ACCESS_KEY = AWS_secret)
-  # }
-  # options(pyMTurkR.sandbox = sandbox)
 
   # convert all hit ids to character
   current_hit_ids <- as.character(current_hit_ids)
@@ -73,16 +67,15 @@ getResults <- function(current_hit_ids,
   } else {
     message(paste0(n_results, ' / ', length(hit_ids), ' results retrieved'))
     if(retry == T){
+      print(difftime(Sys.time(), start_time, units = 'secs'))
       Sys.sleep(retry_in_seconds)
-      return(GetResults(current_batch_id,
-                        current_hit_ids,
+      return(getResults(current_hit_ids,
                         current_document_ids,
-                        hit_categories,
+                        current_batch_id,
                         retry,
                         retry_in_seconds,
-                        AWS_id,
-                        AWS_secret,
-                        sandbox))
+                        retry_for_seconds,
+                        hit_categories))
     }
   }
   results <- cbind(batch_info,
@@ -90,15 +83,21 @@ getResults <- function(current_hit_ids,
                    assignment_id = NA,
                    worker_id = NA,
                    completed_at = NA,
-                   stringsAsFactors = F)[1:(n_results*ncol(current_document_ids)), ]
-
+                   stringsAsFactors = F)
+  results$result <- turk_answers$FreeText[match(results$hit_id, turk_answers$HITId)]
+  results$assignment_id <- turk_answers$AssignmentId[match(results$hit_id, turk_answers$HITId)]
+  results$worker_id <- turk_answers$WorkerId[match(results$hit_id, turk_answers$HITId)]
+  results$completed_at <- turk_assignments$SubmitTime[match(results$hit_id, turk_assignments$HITId)]
+  
+  incomplete <- unique(results$hit_id[is.na(results$result)])
+  # remove incomplete HITs & rearrange columns
+  results <- results[!is.na(results$result), c(1, 5, 3, 4, 2, 6, 7)]
+  
   answer_index <- sapply(turk_answers$FreeText, function(x) which(hit_categories == x))
   answer_index <- answer_index + cumsum(c(0, rep(ncol(current_document_ids), length(answer_index) - 1)))
   results$result <- 0
   results$result[answer_index] <- 1
-  results$assignment_id <- as.vector(sapply(turk_assignments$AssignmentId, function(x) rep(x, ncol(current_document_ids))))
-  results$worker_id <- as.vector(sapply(turk_answers$WorkerId, function(x) rep(x, ncol(current_document_ids))))
-  results$completed_at <- as.vector(sapply(turk_assignments$SubmitTime, function(x) rep(x, ncol(current_document_ids))))
-  results <- results[ , c(1, 5, 3, 4, 2, 6, 7)]
-  return(results)
+  
+  return(list(results = results,
+              incomplete = incomplete))
 }

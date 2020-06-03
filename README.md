@@ -610,7 +610,7 @@ worker IDs for workers who are exclusively in the gold standard set in
 the function’s output.
 
 ``` r
-auditWorkers(current_experiment_results = Results)
+auditWorkers(current_experiment_results = Results$result)
 ```
 
 Workers with a posterior mean less than 1.0 are likely contributing poor

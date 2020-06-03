@@ -1,8 +1,8 @@
 Package: labelR
 Type: Package
 Title: Pairwise Data Labeling with Amazon's Mechanical Turk
-Version: 0.1.0
-Date: 2020-03-17
+Version: 0.1.1
+Date: 2020-06-02
 Author: Ryden Butler
 Maintainer: Ryden Butler <r.butler@wustl.edu>
 Description: Label data in a pairwise comparison framework by crowdsourcing workers on Amazon's Mechanical Turk platform.

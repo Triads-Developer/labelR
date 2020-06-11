@@ -67,14 +67,12 @@ getResults <- function(current_hit_ids,
   } else {
     message(paste0(n_results, ' / ', length(hit_ids), ' results retrieved'))
     if(retry == T){
-      print(difftime(Sys.time(), start_time, units = 'secs'))
       Sys.sleep(retry_in_seconds)
       return(getResults(current_hit_ids,
                         current_document_ids,
                         current_batch_id,
                         retry,
                         retry_in_seconds,
-                        retry_for_seconds,
                         hit_categories))
     }
   }

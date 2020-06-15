@@ -32,6 +32,8 @@
 #' @param closing_message A string containing the final text presented in the
 #' training module. This should contain warnings about worker monitoring and/or
 #' rate limiting procedures.
+#' @param save_files A logical indicating whether the .xml files for the 
+#' qualification test and answer key should be saved to the working directory.
 #'
 #' @details
 #' The function writes generic .xml files required to make an MTurk qualification
@@ -39,7 +41,7 @@
 #' the arguments, the arguments also accept HTML-formatted text.
 #'
 #' @return A list of XML formatted strings that specify the qualification test
-#' and answer key. Each is written as a .xml file in the working directory for
+#' and answer key. By default, each is written as a .xml file in the working directory for
 #' users to make manual revisions.
 #'
 #' @author Ryden Butler
@@ -55,7 +57,8 @@ formatTest <- function(title,
                        practice_questions,
                        test_overview,
                        test_questions,
-                       closing_message){
+                       closing_message,
+                       save_files = T){
 
   n_practice <- length(practice_questions)
   n_test <- length(test_questions)

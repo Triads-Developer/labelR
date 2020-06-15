@@ -31,7 +31,7 @@ auditWorkers <- function(current_experiment_results,
 
   STAN <- fitStan(data = CombinedResults)
   Workers <- checkWorkers(stan_fit = STAN$fit, data = CombinedResults)
-  Counts <- table(as.character(CombinedResults$worker_id[(CombinedResults$worker_id %in% current_experiment_results$worker_id)]))/2
+  Counts <- table(current_experiment_results$worker_id)/2
   Means <- Workers$worker_posteriors[(Workers$worker_posteriors[ , 1] %in% current_experiment_results$worker_id), ]
 
   out <- data.frame(cbind(Means[, 1:2], Counts[match(Means[ , 1], names(Counts))])[sort.list(Means[ , 2]), ])

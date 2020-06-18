@@ -21,7 +21,8 @@
 #' @export
 #'
 auditWorkers <- function(current_experiment_results,
-                         reference_results = NULL){
+                         reference_results = NULL,
+                         plot_results = F){
   if(is.null(reference_results)){
     CombinedResults <- current_experiment_results
   } else {
@@ -34,9 +35,31 @@ auditWorkers <- function(current_experiment_results,
   Counts <- table(current_experiment_results$worker_id)/2
   Means <- Workers$worker_posteriors[(Workers$worker_posteriors[ , 1] %in% current_experiment_results$worker_id), ]
 
-  out <- data.frame(cbind(Means[, 1:2], Counts[match(Means[ , 1], names(Counts))])[sort.list(Means[ , 2]), ])
+  out <- data.frame(cbind(Means[, c(1:2, 5, 9)],
+                          Counts[match(Means[ , 1], names(Counts))]),
+                    stringsAsFactors = F)[sort.list(Means[ , 2], decreasing = T), ]
+  out[ , -1] <- apply(out[ , -1], 2, as.numeric)
   rownames(out) <- NULL
-  colnames(out) <- c('WorkerID', 'CoderAbility', 'nHITs')
+  colnames(out) <- c('WorkerID', 'CoderAbility', '2.5%CI', '97.5%CI', 'nHITs')
   print(out)
+  if(plot_results){
+    plot(x = 1:nrow(out),
+         y = out[ , 2],
+         xlab = '',
+         ylab = 'Ability',
+         las = 1,
+         ylim = c(0, max(out[ , 4])),
+         axes = F, cex = 0.5)
+    axis(1, at = 1:nrow(out), labels = out[ , 1], cex.axis = 0.5, 
+         las = 2,  lwd = 0, line = -0.5)
+    axis(2, at = 0:ceiling(max(out[ , 4])), las = 1)
+    points(x = 1:nrow(out),
+           y = out[ , 3],
+           pch = '-')
+    points(x = 1:nrow(out),
+           y = out[ , 4],
+           pch = '-')
+    abline(h = 1, lty = 2, col = 'blue')
+  }
   return(out)
 }

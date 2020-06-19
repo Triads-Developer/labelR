@@ -70,7 +70,7 @@ formatHIT <- function(question_prompt,
            correct answer to your question -->
     <crowd-classifier
       name=\"equal\"
-      categories=\"[", doc_labels[1], ", ", doc_labels[2] "]\"
+      categories=\"[", doc_labels[1], ", ", doc_labels[2], "]\"
       header=", paste0("\"", question_prompt, "\""),
     ">
         <classification-target>

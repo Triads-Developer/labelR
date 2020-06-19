@@ -37,7 +37,7 @@ formatHIT <- function(question_prompt,
                       instruction_list,
                       short_instruction_list,
                       closing_message,
-                      doc_labels = c('Document 1', 'Document 2')
+                      doc_labels = c('Document 1', 'Document 2'),
                       file_name = 'HIT.html'){
 
   short_template <- paste0(sapply(short_instruction_list, function(x){

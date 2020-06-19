@@ -15,8 +15,9 @@
 #' @param closing_message A string containing the final text presented in the
 #' training module. This should contain warnings about worker monitoring and/or
 #' rate limiting procedures.
+#' @param doc_labels A vector of strings indicating the labels to be assigned to 
+#' each document.
 #' @param file_name A string containing the desired name of the output HTML file.
-#'
 #' @details
 #' The function writes a generic .html file required to make a MTurk HIT. Though
 #' the function is designed for users to pass strings directly into
@@ -36,6 +37,7 @@ formatHIT <- function(question_prompt,
                       instruction_list,
                       short_instruction_list,
                       closing_message,
+                      doc_labels = c('Document 1', 'Document 2')
                       file_name = 'HIT.html'){
 
   short_template <- paste0(sapply(short_instruction_list, function(x){
@@ -68,12 +70,12 @@ formatHIT <- function(question_prompt,
            correct answer to your question -->
     <crowd-classifier
       name=\"equal\"
-      categories=\"['Document 1', 'Document 2']\"
+      categories=\"[", doc_labels[1], ", ", doc_labels[2] "]\"
       header=", paste0("\"", question_prompt, "\""),
     ">
         <classification-target>
             <div>
-                <h3>Document 1</h3>
+                <h3>", doc_labels[1], "</h3>
 	      	<p>
                    <!-- The first document text will be substituted for the doc1 variable below -->
                     ${doc1}
@@ -81,7 +83,7 @@ formatHIT <- function(question_prompt,
 	    </div>
 	    <hr/>
             <div>
-                <h3>Document 2</h3>
+                <h3>", doc_labels[2], "</h3>
 	      	<p>
                    <!-- The second document text will be substituted for the doc2 variable below -->
                     ${doc2}

@@ -10,6 +10,9 @@
 #' appears in the MTurk qualification test.
 #' @param question_prompt A string containing the common question prompt used
 #' across all pairwise comparison questions.
+#' @param is_image A logical where TRUE will cause the first two 
+#' \code{question_list} elements to be treated as images for formatting purposes. 
+#' FALSE is default and treats the first two \code{question_list} elements as html-formatted text.
 #' @param test_question A logical where FALSE indicates that the question is
 #' a practice question and TRUE indicates that the question is a test question.
 #'
@@ -29,11 +32,31 @@
 formatQuestion <- function(question_list,
                            question_number,
                            question_prompt,
+                           is_image = F,
                            test_question = F){
 
   is_required <- ifelse(test_question, 'true', 'false')
   question_type <- ifelse(test_question, 'Test', 'Example')
   question_abbrev <- ifelse(test_question, 'T', 'E')
+  
+  if(is_image){
+    Q1 <- paste0(
+    "<Binary>
+      <MimeType><Type>image</Type></MimeType>
+      <DataURL>", question_list[[1]], "</DataURL>
+      <AltText>Image 1</AltText>
+    </Binary>")
+    
+    Q2 <- paste0(
+      "<Binary>
+      <MimeType><Type>image</Type></MimeType>
+      <DataURL>", question_list[[2]], "</DataURL>
+      <AltText>Image 1</AltText>
+    </Binary>")
+  } else {
+    Q1 <- paste0("<FormattedContent><![CDATA[<p>", question_list[[1]], "</p>]]></FormattedContent>")
+    Q2 <- paste0("<FormattedContent><![CDATA[<p>", question_list[[2]], "</p>]]></FormattedContent>")
+  }
 
   question <- paste0(
   "<Question>
@@ -48,15 +71,13 @@ formatQuestion <- function(question_list,
        <StyleSuggestion>radiobutton</StyleSuggestion>
          <Selections>
            <Selection>
-           <SelectionIdentifier>left</SelectionIdentifier>
-           <FormattedContent><![CDATA[
-             <p>", question_list[[1]], "</p>]]></FormattedContent>
-           </Selection>
+           <SelectionIdentifier>left</SelectionIdentifier>", 
+           Q1, 
+           "</Selection>
            <Selection>
-           <SelectionIdentifier>right</SelectionIdentifier>
-           <FormattedContent><![CDATA[
-             <p>", question_list[[2]], "</p>]]></FormattedContent>
-           </Selection>
+           <SelectionIdentifier>right</SelectionIdentifier>", 
+           Q2, 
+           "</Selection>
          </Selections>
        </SelectionAnswer>
      </AnswerSpecification>

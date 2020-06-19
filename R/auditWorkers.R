@@ -6,6 +6,11 @@
 #' containing HIT results from Mechanical Turk.
 #' @param reference_results An optional object of HIT results from previous
 #' experiments. When available, this improves the accuracy of worker quality scores.
+#' @param exclude_workers An optional object of worker ids to be excluded from 
+#' the printed output. Typically, a vector of ids for banned worker is passed here 
+#' to prevent them from continually appearing in audits.
+#' @param plot_audit When TRUE, the function will produce a plot of worker ability 
+#' estimates and their corresponding 95% credible intervals.
 #'
 #' @details
 #' The function audits worker quality using a Bayesian hierarchical model. Worker
@@ -22,7 +27,8 @@
 #'
 auditWorkers <- function(current_experiment_results,
                          reference_results = NULL,
-                         plot_results = F){
+                         exclude_workers = NULL,
+                         plot_audit = F){
   if(is.null(reference_results)){
     CombinedResults <- current_experiment_results
   } else {
@@ -35,14 +41,15 @@ auditWorkers <- function(current_experiment_results,
   Counts <- table(current_experiment_results$worker_id)/2
   Means <- Workers$worker_posteriors[(Workers$worker_posteriors[ , 1] %in% current_experiment_results$worker_id), ]
 
-  out <- data.frame(cbind(Means[, c(1:2, 5, 9)],
+  result <- data.frame(cbind(Means[, c(1:2, 5, 9)],
                           Counts[match(Means[ , 1], names(Counts))]),
                     stringsAsFactors = F)[sort.list(Means[ , 2], decreasing = T), ]
-  out[ , -1] <- apply(out[ , -1], 2, as.numeric)
-  rownames(out) <- NULL
-  colnames(out) <- c('WorkerID', 'CoderAbility', '2.5%CI', '97.5%CI', 'nHITs')
+  result[ , -1] <- apply(result[ , -1], 2, as.numeric)
+  rownames(result) <- NULL
+  colnames(result) <- c('WorkerID', 'CoderAbility', '2.5%CI', '97.5%CI', 'nHITs')
+  out <- result[!(result[ , 1] %in% exclude_workers), ]
   print(out)
-  if(plot_results){
+  if(plot_audit){
     plot(x = 1:nrow(out),
          y = out[ , 2],
          xlab = '',
@@ -61,5 +68,5 @@ auditWorkers <- function(current_experiment_results,
            pch = '-')
     abline(h = 1, lty = 2, col = 'blue')
   }
-  return(out)
+  return(result)
 }

@@ -21,6 +21,8 @@
 #' list contains three elements, where the first and second element
 #' contain the left and right comparison text, respectively, and the third
 #' element contains text explaining the correct answer.
+#' @param practice_image A logical. When TRUE the \code{practice_questions} inputs
+#' will be treated as images for formatting purposes.
 #' @param test_overview A string providing general instructions for the
 #' test questions within the qualification test. This should contain information
 #' about scoring procedures.
@@ -29,6 +31,8 @@
 #' list contains three elements, where the first and second element
 #' contain the left and right comparison text, respectively, and the third
 #' element contains an integer corresponding to the index of the correct choice.
+#' @param test_image A logical. When TRUE the \code{test_questions} inputs
+#' will be treated as images for formatting purposes.
 #' @param closing_message A string containing the final text presented in the
 #' training module. This should contain warnings about worker monitoring and/or
 #' rate limiting procedures.
@@ -55,8 +59,10 @@ formatTest <- function(title,
                        question_prompt,
                        practice_overview,
                        practice_questions,
+                       practice_image = F,
                        test_overview,
                        test_questions,
+                       test_image = F,
                        closing_message,
                        save_files = T){
 
@@ -66,11 +72,11 @@ formatTest <- function(title,
   formatted_instruction_list <- paste0('<ul>', listify(instruction_list), '</ul>')
 
   formatted_practice <- paste0(sapply(1:length(practice_questions), function(x){
-    formatQuestion(practice_questions[[x]], x, question_prompt, test_question = F)
+    formatQuestion(practice_questions[[x]], x, question_prompt, test_question = F, is_image = practice_image)
   }), collapse = '')
 
   formatted_test <- paste0(sapply(1:length(test_questions), function(x){
-    formatQuestion(test_questions[[x]], x, question_prompt, test_question = T)
+    formatQuestion(test_questions[[x]], x, question_prompt, test_question = T, is_image = test_image)
   }), collapse = '')
 
   instructions <- paste0("<h2>Instructions</h2><p>",

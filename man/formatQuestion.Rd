@@ -4,8 +4,13 @@
 \alias{formatQuestion}
 \title{Format a MTurk qualification test question}
 \usage{
-formatQuestion(question_list, question_number, question_prompt,
-  test_question = F)
+formatQuestion(
+  question_list,
+  question_number,
+  question_prompt,
+  is_image = F,
+  test_question = F
+)
 }
 \arguments{
 \item{question_list}{A list object where the first and second element
@@ -17,6 +22,10 @@ appears in the MTurk qualification test.}
 
 \item{question_prompt}{A string containing the common question prompt used
 across all pairwise comparison questions.}
+
+\item{is_image}{A logical where TRUE will cause the first two 
+\code{question_list} elements to be treated as images for formatting purposes. 
+FALSE is default and treats the first two \code{question_list} elements as html-formatted text.}
 
 \item{test_question}{A logical where FALSE indicates that the question is
 a practice question and TRUE indicates that the question is a test question.}

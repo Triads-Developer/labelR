@@ -4,9 +4,14 @@
 \alias{sendComparisons}
 \title{Send comparisons to Mechanical Turk}
 \usage{
-sendComparisons(hit_type = NULL, hit_layout = NULL,
-  comparisons_to_send = NULL, expire_in_seconds = as.character(60 * 60
-  * 8), n_assignments = "1", hit_param_names = c("doc1", "doc2"))
+sendComparisons(
+  hit_type = NULL,
+  hit_layout = NULL,
+  comparisons_to_send = NULL,
+  expire_in_seconds = as.character(60 * 60 * 8),
+  n_assignments = "1",
+  hit_param_names = c("doc1", "doc2")
+)
 }
 \arguments{
 \item{hit_type}{The HITType ID from the MTurk requester dashboard.}

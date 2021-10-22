@@ -4,8 +4,15 @@
 \alias{formatHIT}
 \title{Format a MTurk HIT}
 \usage{
-formatHIT(question_prompt, instruction_overview, instruction_list,
-  short_instruction_list, closing_message, file_name = "HIT.html")
+formatHIT(
+  question_prompt,
+  instruction_overview,
+  instruction_list,
+  short_instruction_list,
+  closing_message,
+  doc_labels = c("Document 1", "Document 2"),
+  file_name = "HIT.html"
+)
 }
 \arguments{
 \item{question_prompt}{A string containing the common question prompt used
@@ -18,15 +25,18 @@ and examples. Each element of the list object corresponds to a separate bullet
 in the list of instructions. Nesting list objects within one another will allow
 for nested bullets.}
 
+\item{short_instruction_list}{A nested list of lists containing bulleted instructions
+for HITs. This should be an abridged version of \code{instruction_list} that is
+displayed within the HIT's short instruction tab.}
+
 \item{closing_message}{A string containing the final text presented in the
 training module. This should contain warnings about worker monitoring and/or
 rate limiting procedures.}
 
-\item{file_name}{A string containing the desired name of the output HTML file.}
+\item{doc_labels}{A vector of strings indicating the labels to be assigned to 
+each document.}
 
-\item{short_instructions}{A nested list of lists containing bulleted instructions
-for HITs. This should be an abridged version of \code{instruction_list} that is
-displayed within the HIT's short instruction tab.}
+\item{file_name}{A string containing the desired name of the output HTML file.}
 }
 \value{
 A string of HTML code that formats a HIT for MTurk. This is also

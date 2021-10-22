@@ -7,13 +7,14 @@ Author: Ryden Butler
 Maintainer: Ryden Butler <r.butler@wustl.edu>
 Description: Label data in a pairwise comparison framework by crowdsourcing workers on Amazon's Mechanical Turk platform.
 Depends:
-    R (>= 3.6.1),
+    R (>= 4.0.3),
     methods 
 License: GPL (>= 2)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Imports:
   pyMTurkR,
-  sentimentIt
+  sentimentIt,
+  graphics
 Collate:
   'auditWorkers.R'
   'getResults.R'

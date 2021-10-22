@@ -9,7 +9,7 @@
 #' and examples. Each element of the list object corresponds to a separate bullet
 #' in the list of instructions. Nesting list objects within one another will allow
 #' for nested bullets.
-#' @param short_instructions A nested list of lists containing bulleted instructions
+#' @param short_instruction_list A nested list of lists containing bulleted instructions
 #' for HITs. This should be an abridged version of \code{instruction_list} that is
 #' displayed within the HIT's short instruction tab.
 #' @param closing_message A string containing the final text presented in the

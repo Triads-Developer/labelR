@@ -4,9 +4,20 @@
 \alias{formatTest}
 \title{Format a MTurk qualification test}
 \usage{
-formatTest(title, instruction_overview, instruction_list, question_prompt,
-  practice_overview, practice_questions, test_overview, test_questions,
-  closing_message)
+formatTest(
+  title,
+  instruction_overview,
+  instruction_list,
+  question_prompt,
+  practice_overview,
+  practice_questions,
+  practice_image = F,
+  test_overview,
+  test_questions,
+  test_image = F,
+  closing_message,
+  save_files = T
+)
 }
 \arguments{
 \item{title}{A string containing the title of the qualification test, as it
@@ -33,6 +44,9 @@ list contains three elements, where the first and second element
 contain the left and right comparison text, respectively, and the third
 element contains text explaining the correct answer.}
 
+\item{practice_image}{A logical. When TRUE the \code{practice_questions} inputs
+will be treated as images for formatting purposes.}
+
 \item{test_overview}{A string providing general instructions for the
 test questions within the qualification test. This should contain information
 about scoring procedures.}
@@ -43,13 +57,19 @@ list contains three elements, where the first and second element
 contain the left and right comparison text, respectively, and the third
 element contains an integer corresponding to the index of the correct choice.}
 
+\item{test_image}{A logical. When TRUE the \code{test_questions} inputs
+will be treated as images for formatting purposes.}
+
 \item{closing_message}{A string containing the final text presented in the
 training module. This should contain warnings about worker monitoring and/or
 rate limiting procedures.}
+
+\item{save_files}{A logical indicating whether the .xml files for the 
+qualification test and answer key should be saved to the working directory.}
 }
 \value{
 A list of XML formatted strings that specify the qualification test
-and answer key. Each is written as a .xml file in the working directory for
+and answer key. By default, each is written as a .xml file in the working directory for
 users to make manual revisions.
 }
 \description{

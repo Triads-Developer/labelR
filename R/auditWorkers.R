@@ -10,7 +10,7 @@
 #' the printed output. Typically, a vector of ids for banned worker is passed here 
 #' to prevent them from continually appearing in audits.
 #' @param plot_audit When TRUE, the function will produce a plot of worker ability 
-#' estimates and their corresponding 95% credible intervals.
+#' estimates and their corresponding 95 percent credible intervals.
 #'
 #' @details
 #' The function audits worker quality using a Bayesian hierarchical model. Worker
@@ -23,6 +23,7 @@
 #'
 #' @rdname auditWorkers
 #' @import 'sentimentIt'
+#' @import 'graphics'
 #' @export
 #'
 auditWorkers <- function(current_experiment_results,
@@ -50,23 +51,24 @@ auditWorkers <- function(current_experiment_results,
   out <- result[!(result[ , 1] %in% exclude_workers), ]
   print(out)
   if(plot_audit){
-    plot(x = 1:nrow(out),
-         y = out[ , 2],
-         xlab = '',
-         ylab = 'Ability',
-         las = 1,
-         ylim = c(0, max(out[ , 4])),
-         axes = F, cex = 0.5)
-    axis(1, at = 1:nrow(out), labels = out[ , 1], cex.axis = 0.5, 
-         las = 2,  lwd = 0, line = -0.5)
-    axis(2, at = 0:ceiling(max(out[ , 4])), las = 1)
-    points(x = 1:nrow(out),
-           y = out[ , 3],
-           pch = '-')
-    points(x = 1:nrow(out),
-           y = out[ , 4],
-           pch = '-')
-    abline(h = 1, lty = 2, col = 'blue')
+    graphics::plot(x = 1:nrow(out),
+                   y = out[ , 2],
+                   xlab = '',
+                   ylab = 'Ability',
+                   las = 1,
+                   ylim = c(0, max(out[ , 4])),
+                   axes = F, cex = 0.5)
+    graphics::axis(1, at = 1:nrow(out), labels = out[ , 1], cex.axis = 0.5, 
+                   las = 2,  lwd = 0, line = -0.5)
+    graphics::axis(2, at = 0:ceiling(max(out[ , 4])), las = 1)
+    graphics::points(x = 1:nrow(out),
+                     y = out[ , 3],
+                     pch = '-')
+    graphics::points(x = 1:nrow(out),
+                     y = out[ , 4],
+                     pch = '-')
+           
+    graphics::abline(h = 1, lty = 2, col = 'blue')
   }
   return(result)
 }

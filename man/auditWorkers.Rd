@@ -4,7 +4,12 @@
 \alias{auditWorkers}
 \title{Audit Mechanical Turk workers}
 \usage{
-auditWorkers(current_experiment_results, reference_results = NULL)
+auditWorkers(
+  current_experiment_results,
+  reference_results = NULL,
+  exclude_workers = NULL,
+  plot_audit = F
+)
 }
 \arguments{
 \item{current_experiment_results}{An object returned from \code{getResults}
@@ -12,6 +17,13 @@ containing HIT results from Mechanical Turk.}
 
 \item{reference_results}{An optional object of HIT results from previous
 experiments. When available, this improves the accuracy of worker quality scores.}
+
+\item{exclude_workers}{An optional object of worker ids to be excluded from 
+the printed output. Typically, a vector of ids for banned worker is passed here 
+to prevent them from continually appearing in audits.}
+
+\item{plot_audit}{When TRUE, the function will produce a plot of worker ability 
+estimates and their corresponding 95 percent credible intervals.}
 }
 \value{
 A dataframe containing workers' posterior means and HIT frequencies.

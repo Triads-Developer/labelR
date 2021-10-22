@@ -4,9 +4,14 @@
 \alias{getResults}
 \title{Get results from Mechanical Turk}
 \usage{
-getResults(current_hit_ids, current_document_ids, current_batch_id = 0,
-  retry = T, retry_in_seconds = 60, hit_categories = c("Document 1",
-  "Document 2"))
+getResults(
+  current_hit_ids,
+  current_document_ids,
+  current_batch_id = 0,
+  retry = T,
+  retry_in_seconds = 60,
+  hit_categories = c("Document 1", "Document 2")
+)
 }
 \arguments{
 \item{current_hit_ids}{A vector of HIT ids to be retieved.}
@@ -31,7 +36,8 @@ using a custom version of HITformat.html where alternate category names have
 been specified.}
 }
 \value{
-A data.frame of results from MTurk.
+A list containing a data.frame of results from MTurk and a vector of 
+HIT ids of incomplete HITs.
 }
 \description{
 \code{getResults} downloads completed work from MTurk for the specified HITs

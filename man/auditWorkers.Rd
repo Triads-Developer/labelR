@@ -18,11 +18,11 @@ containing HIT results from Mechanical Turk.}
 \item{reference_results}{An optional object of HIT results from previous
 experiments. When available, this improves the accuracy of worker quality scores.}
 
-\item{exclude_workers}{An optional object of worker ids to be excluded from 
-the printed output. Typically, a vector of ids for banned worker is passed here 
+\item{exclude_workers}{An optional object of worker ids to be excluded from
+the printed output. Typically, a vector of ids for banned worker is passed here
 to prevent them from continually appearing in audits.}
 
-\item{plot_audit}{When TRUE, the function will produce a plot of worker ability 
+\item{plot_audit}{When TRUE, the function will produce a plot of worker ability
 estimates and their corresponding 95 percent credible intervals.}
 }
 \value{

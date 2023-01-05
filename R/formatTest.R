@@ -36,7 +36,7 @@
 #' @param closing_message A string containing the final text presented in the
 #' training module. This should contain warnings about worker monitoring and/or
 #' rate limiting procedures.
-#' @param save_files A logical indicating whether the .xml files for the 
+#' @param save_files A logical indicating whether the .xml files for the
 #' qualification test and answer key should be saved to the working directory.
 #'
 #' @details
@@ -64,28 +64,29 @@ formatTest <- function(title,
                        test_questions,
                        test_image = F,
                        closing_message,
-                       save_files = T){
-
+                       save_files = T) {
   n_practice <- length(practice_questions)
   n_test <- length(test_questions)
 
-  formatted_instruction_list <- paste0('<ul>', listify(instruction_list), '</ul>')
+  formatted_instruction_list <- paste0("<ul>", listify(instruction_list), "</ul>")
 
-  formatted_practice <- paste0(sapply(1:length(practice_questions), function(x){
+  formatted_practice <- paste0(sapply(1:length(practice_questions), function(x) {
     formatQuestion(practice_questions[[x]], x, question_prompt, test_question = F, is_image = practice_image)
-  }), collapse = '')
+  }), collapse = "")
 
-  formatted_test <- paste0(sapply(1:length(test_questions), function(x){
+  formatted_test <- paste0(sapply(1:length(test_questions), function(x) {
     formatQuestion(test_questions[[x]], x, question_prompt, test_question = T, is_image = test_image)
-  }), collapse = '')
+  }), collapse = "")
 
-  instructions <- paste0("<h2>Instructions</h2><p>",
-                         instruction_overview,
-                         "</p> <h2>Here are a few rules of thumb to guide you</h2>",
-                         formatted_instruction_list)
+  instructions <- paste0(
+    "<h2>Instructions</h2><p>",
+    instruction_overview,
+    "</p> <h2>Here are a few rules of thumb to guide you</h2>",
+    formatted_instruction_list
+  )
 
   question_form <- paste0(
-  "<QuestionForm xmlns=\"http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/QuestionForm.xsd\">
+    "<QuestionForm xmlns=\"http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/QuestionForm.xsd\">
      <Overview>
        <Title>", title, "</Title>
          <FormattedContent><![CDATA[", instructions, "]]></FormattedContent>
@@ -94,38 +95,43 @@ formatTest <- function(title,
         <FormattedContent><![CDATA[
           <br></br>
           <h2>The next ", n_practice, " questions are example HITs</h2><p>",
-          practice_overview,
-          "</p><br></br>]]></FormattedContent>
+    practice_overview,
+    "</p><br></br>]]></FormattedContent>
       </Overview>",
-      formatted_practice,
-      "<Overview>
+    formatted_practice,
+    "<Overview>
         <FormattedContent><![CDATA[
           <br></br>
           <h2>The next ", n_test, " questions are your test HITs.</h2><p>",
-          test_overview,
-          "</p><br></br>]]></FormattedContent>
+    test_overview,
+    "</p><br></br>]]></FormattedContent>
        </Overview>",
-       formatted_test,
-       "<Overview>
+    formatted_test,
+    "<Overview>
         <FormattedContent><![CDATA[
           <h2>Before you submit your answers...</h2>
           <br></br>
           <p><b>You will only have 1 chance to take this test.</b> Make sure that you are satisfied with all of your answers above before submitting.
           <br></br>", closing_message, "</p>]]></FormattedContent>
       </Overview>
-  </QuestionForm>")
+  </QuestionForm>"
+  )
 
   writeLines(question_form, "QualTest.xml")
 
-  formatted_answers <- paste0(sapply(1:length(test_questions), function(x){
+  formatted_answers <- paste0(sapply(1:length(test_questions), function(x) {
     formatAnswers(test_questions[[x]], x)
-  }), collapse = '')
+  }), collapse = "")
 
-  answer_form <- paste0("<AnswerKey xmlns=\"http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/AnswerKey.xsd\">",
-                       formatted_answers,
-                       "</AnswerKey>")
+  answer_form <- paste0(
+    "<AnswerKey xmlns=\"http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/AnswerKey.xsd\">",
+    formatted_answers,
+    "</AnswerKey>"
+  )
 
   writeLines(answer_form, "AnswerKey.xml")
-  return(list(Questions = question_form,
-              Answers = answer_form))
+  return(list(
+    Questions = question_form,
+    Answers = answer_form
+  ))
 }

@@ -22,9 +22,9 @@
 #' @export
 
 formatAnswers <- function(question_list,
-                          question_number){
+                          question_number) {
   answer <- paste0(
-   "<Question>
+    "<Question>
      <QuestionIdentifier>Test", question_number, "</QuestionIdentifier>
     <AnswerOption>
       <SelectionIdentifier>left</SelectionIdentifier>
@@ -34,7 +34,8 @@ formatAnswers <- function(question_list,
       <SelectionIdentifier>right</SelectionIdentifier>
       <AnswerScore>", ifelse(question_list[[3]] == 1, 0, 1), "</AnswerScore>
     </AnswerOption>
-  </Question>")
+  </Question>"
+  )
 
   return(answer)
 }

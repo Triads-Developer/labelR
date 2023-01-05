@@ -33,7 +33,7 @@ displayed within the HIT's short instruction tab.}
 training module. This should contain warnings about worker monitoring and/or
 rate limiting procedures.}
 
-\item{doc_labels}{A vector of strings indicating the labels to be assigned to 
+\item{doc_labels}{A vector of strings indicating the labels to be assigned to
 each document.}
 
 \item{file_name}{A string containing the desired name of the output HTML file.}

@@ -23,8 +23,8 @@ appears in the MTurk qualification test.}
 \item{question_prompt}{A string containing the common question prompt used
 across all pairwise comparison questions.}
 
-\item{is_image}{A logical where TRUE will cause the first two 
-\code{question_list} elements to be treated as images for formatting purposes. 
+\item{is_image}{A logical where TRUE will cause the first two
+\code{question_list} elements to be treated as images for formatting purposes.
 FALSE is default and treats the first two \code{question_list} elements as html-formatted text.}
 
 \item{test_question}{A logical where FALSE indicates that the question is

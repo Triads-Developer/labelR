@@ -36,7 +36,7 @@ using a custom version of HITformat.html where alternate category names have
 been specified.}
 }
 \value{
-A list containing a data.frame of results from MTurk and a vector of 
+A list containing a data.frame of results from MTurk and a vector of
 HIT ids of incomplete HITs.
 }
 \description{

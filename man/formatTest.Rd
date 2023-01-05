@@ -64,7 +64,7 @@ will be treated as images for formatting purposes.}
 training module. This should contain warnings about worker monitoring and/or
 rate limiting procedures.}
 
-\item{save_files}{A logical indicating whether the .xml files for the 
+\item{save_files}{A logical indicating whether the .xml files for the
 qualification test and answer key should be saved to the working directory.}
 }
 \value{

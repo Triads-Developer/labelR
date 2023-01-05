@@ -15,7 +15,7 @@
 #' @param closing_message A string containing the final text presented in the
 #' training module. This should contain warnings about worker monitoring and/or
 #' rate limiting procedures.
-#' @param doc_labels A vector of strings indicating the labels to be assigned to 
+#' @param doc_labels A vector of strings indicating the labels to be assigned to
 #' each document.
 #' @param file_name A string containing the desired name of the output HTML file.
 #' @details
@@ -37,27 +37,34 @@ formatHIT <- function(question_prompt,
                       instruction_list,
                       short_instruction_list,
                       closing_message,
-                      doc_labels = c('Document 1', 'Document 2'),
-                      file_name = 'HIT.html'){
+                      doc_labels = c("Document 1", "Document 2"),
+                      file_name = "HIT.html") {
+  short_template <- paste0(sapply(short_instruction_list, function(x) {
+    paste0(
+      "<h3>", x[1], "</h3>",
+      paste0(
+        "<p>",
+        paste0(sapply(
+          x[-1],
+          function(i) {
+            paste0("- ", i, "<br><br>")
+          }
+        ), collapse = ""),
+        "</p>"
+      )
+    )
+  }), collapse = "")
 
-  short_template <- paste0(sapply(short_instruction_list, function(x){
-    paste0("<h3>", x[1], "</h3>",
-           paste0("<p>",
-                  paste0(sapply(x[-1],
-                                function(i){
-                                  paste0("- ", i , "<br><br>")
-                                  }), collapse = ''),
-                  "</p>"))
-    }), collapse = '')
+  formatted_instruction_list <- paste0("<ul>", listify(instruction_list), "</ul>")
 
-  formatted_instruction_list <- paste0('<ul>', listify(instruction_list), '</ul>')
-
-  instructions <- paste0("<h2>Instructions</h2><p>",
-                         instruction_overview,
-                         "</p> <h2>Here are a few rules of thumb to guide you</h2>",
-                         formatted_instruction_list)
+  instructions <- paste0(
+    "<h2>Instructions</h2><p>",
+    instruction_overview,
+    "</p> <h2>Here are a few rules of thumb to guide you</h2>",
+    formatted_instruction_list
+  )
   hit <- paste0(
-  "<!-- You must include this JavaScript file -->
+    "<!-- You must include this JavaScript file -->
    <script src=\"https://assets.crowd.aws/crowd-html-elements.js\"></script>
 
    <!-- For the full list of available Crowd HTML Elements and their input/output documentation,
@@ -98,7 +105,7 @@ formatHIT <- function(question_prompt,
               any HTML here. -->
         <short-instructions>
           <h2>Rules:</h2>", short_template,
-        "<h4>See full instructions above for more detail</h4>
+    "<h4>See full instructions above for more detail</h4>
       </short-instructions>
 
       <!-- Use the full-instructions section for more detailed instructions that the
@@ -106,11 +113,12 @@ formatHIT <- function(question_prompt,
             instructions and additional examples of good and bad answers here can
             help get good results. You can include any HTML here. -->
       <full-instructions>",
-        instructions,
-      "<p>", closing_message, "</p>
+    instructions,
+    "<p>", closing_message, "</p>
       </full-instructions>
     </crowd-classifier>
-</crowd-form>")
+</crowd-form>"
+  )
   writeLines(hit, file_name)
   print(paste0("HIT format written to file: ", file_name))
   return(hit)

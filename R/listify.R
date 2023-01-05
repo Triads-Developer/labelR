@@ -17,15 +17,16 @@
 #'
 #' @rdname listify
 
-listify <- function(nested_list){
-  paste(sapply(nested_list, function(x){
+listify <- function(nested_list) {
+  paste(sapply(nested_list, function(x) {
     ifelse(length(x) == 1,
-           paste0('<li>', x, '</li>'),
-           paste(sapply(x, function(y){
-             ifelse(!is.list(y),
-                    paste0('<li>', y),
-                    paste0('<ul>', listify(y), '</ul></li>'))
-           }), collapse = '')
+      paste0("<li>", x, "</li>"),
+      paste(sapply(x, function(y) {
+        ifelse(!is.list(y),
+          paste0("<li>", y),
+          paste0("<ul>", listify(y), "</ul></li>")
+        )
+      }), collapse = "")
     )
-  }), collapse = '')
+  }), collapse = "")
 }

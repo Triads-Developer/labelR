@@ -1,5 +1,6 @@
 ---
 output: github_document
+
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -48,14 +49,14 @@ First, load labelR and pyMTurkR into your session and import your MTurk credenti
 library(labelR)
 library(pyMTurkR)
 
-source('MTurkCredentials.R')
+source("MTurkCredentials.R")
 ```
 
 I store my credentials in the file MTurkCredentials.R, which is formatted as follows:
 
 ```{r MTurkCredentials, eval = F}
-access_key = "ABC123"
-secret_key = "Shhh!"
+access_key <- "ABC123"
+secret_key <- "Shhh!"
 ```
 
 Store your access key and secret in the R session so that they can be accessed by pyMTurkR throughout. For this tutorial, and while testing out the system, you should remain in sandbox mode by keeping pyMTurkR.sandbox = T. You should always run pyMTurkR::AccountBalance() before sending HITs to MTurk to verfiy whether you are in sandbox mode (your balance in sandbox mode is always $10,000.00). If you can execute the code below without error, you are ready to begin
@@ -79,31 +80,41 @@ Some of the inputs to formatTest can be unintuitive. An object containing exampl
 
 ```{r QualificationTest, eval = F}
 data("Text")
-QualTest <- formatTest(title = Text$Title,
-                       instruction_overview = Text$InstructionOverview,
-                       instruction_list = Text$InstructionList,
-                       question_prompt = Text$QuestionPrompt,
-                       practice_overview = Text$PracticeOverview,
-                       practice_questions = Text$PracticeQuestions,
-                       test_overview = Text$TestOverview,
-                       test_questions = Text$TestQuestions,
-                       closing_message = Text$ClosingMessage)
+QualTest <- formatTest(
+  title = Text$Title,
+  instruction_overview = Text$InstructionOverview,
+  instruction_list = Text$InstructionList,
+  question_prompt = Text$QuestionPrompt,
+  practice_overview = Text$PracticeOverview,
+  practice_questions = Text$PracticeQuestions,
+  test_overview = Text$TestOverview,
+  test_questions = Text$TestQuestions,
+  closing_message = Text$ClosingMessage
+)
 ```
 
 The arguments title, instruction_overview, question_prompt, practice_overview, test_overview, and closing_message all require a string object. The instruction_list argument requires a nested list object with a specific format. This content will create a bulleted list of key rules and simple examples to explain the task to workers. If an element of the primary list is a string, it is converted to a bullet in the training module. If an element of the primary list is a list object, the first element of this sub-list should be a string, which will be converted to a bullet in the training module. The second element in the sub-list should also be a list containing at least one string-formatted element. The elements of this list will be converted to sub-bullets in the training module, which are indented with respect to the top-level bullets and will possess a different bullet style.
 
 ```{r InstructionList, eval = F}
 InstructionList <- list(
-  'If both advertisements attack a candidate, pick whichever of the two advertisements is most negative',
-  'If both advertisements praise a candidate, pick whichever of the two advertisements is least positive',
-  list("Ads that attack a candidate's personal characteristics are generally more negative than ads that  attack a candidate's record or job performance",
-       list('"Bob is dishonest" is more negative than "Bob is too liberal"')),
-  list('Ads that attack an individual are generally more negative than ads that attack a group',
-       list('"Bob is a Washington fat cat" is more negative than "We need to stop the fat cats in Washington"')),
-  list('Ads that attack a specific candidate alone are generally more negative than ads that contrast two candidates', 
-       list('"Bob is unqualified" is more negative than "Bob is unqualified, but Jill is very experienced"')),
-  list('Ads that state a policy position are generally less positive than ads that praise a candidate as a person',
-       list('"Bob will fix unemployment" is less positive than "Bob is a leader"'))
+  "If both advertisements attack a candidate, pick whichever of the two advertisements is most negative",
+  "If both advertisements praise a candidate, pick whichever of the two advertisements is least positive",
+  list(
+    "Ads that attack a candidate's personal characteristics are generally more negative than ads that  attack a candidate's record or job performance",
+    list('"Bob is dishonest" is more negative than "Bob is too liberal"')
+  ),
+  list(
+    "Ads that attack an individual are generally more negative than ads that attack a group",
+    list('"Bob is a Washington fat cat" is more negative than "We need to stop the fat cats in Washington"')
+  ),
+  list(
+    "Ads that attack a specific candidate alone are generally more negative than ads that contrast two candidates",
+    list('"Bob is unqualified" is more negative than "Bob is unqualified, but Jill is very experienced"')
+  ),
+  list(
+    "Ads that state a policy position are generally less positive than ads that praise a candidate as a person",
+    list('"Bob will fix unemployment" is less positive than "Bob is a leader"')
+  )
 )
 ```
 
@@ -149,44 +160,46 @@ Ads that state a policy position are generally less positive than ads that prais
 The practice_questions argument also takes a nested list object with a particular format. It contains the contents of example questions offered as guidance for workers in the qualification test. The primary list contains a series of sub-lists, one for each practice question. Each sub-list is comprised of three elements. The first and second elements are strings, which contain the texts for documents 1 and 2 of a pairwise comparison, respectively. The third element is a string containing explanatory text that indicates which document the worker should select and why that answer is correct.
 
 ```{r PracticeQuestions, eval = F}
-PracticeQuestions = list(
-  list("[Announcer]: Mark Udall claims he voted for tax cuts 65 times. 
-       [Reporter]: \"Actually it's not true.\" 
-       [Mark Udall]: \"I'm just kidding.\" Udall claims that now he supports our troops, drilling off shore, bi-partisanship. 
-       [Mark Udall]: \"I'm just kidding.\" 
-       [Announcer]: But through his career he has opposed them all. <font color=\"red\">Udall has a lot of ads, but a shortage of truth.</font> 
-       [Mark Udall]: \"I'm just kidding.\" 
-       [Announcer]: <font color=\"red\">Mark Udall is not honest about his past</font> and now it's catching up with him. 
-       The National Republican Senatorial Committee is responsible for the content of this advertising. 
+PracticeQuestions <- list(
+  list(
+    "[Announcer]: Mark Udall claims he voted for tax cuts 65 times.
+       [Reporter]: \"Actually it's not true.\"
+       [Mark Udall]: \"I'm just kidding.\" Udall claims that now he supports our troops, drilling off shore, bi-partisanship.
+       [Mark Udall]: \"I'm just kidding.\"
+       [Announcer]: But through his career he has opposed them all. <font color=\"red\">Udall has a lot of ads, but a shortage of truth.</font>
+       [Mark Udall]: \"I'm just kidding.\"
+       [Announcer]: <font color=\"red\">Mark Udall is not honest about his past</font> and now it's catching up with him.
+       The National Republican Senatorial Committee is responsible for the content of this advertising.
        [PFB]: NATIONAL REPUBLICAN SENATORIAL COMMITTEE  (9)",
-       "[Announcer]: You want a leader you can believe in, who shares your values, and vision for the future. 
-       On March 11th vote Erik Fleming for United States Senator. 
-       He knows the importance and power of faith. 
-       In these uncertain and changing times <font color=\"green\">Erik Fleming can guide us to a better more secure future for our families. 
-       Believe in Erik Fleming. 
-       He will lead us in the right direction.</font> 
-       [Erik Fleming]: \"I'm Erik Fleming and I approve this message.\" 
+    "[Announcer]: You want a leader you can believe in, who shares your values, and vision for the future.
+       On March 11th vote Erik Fleming for United States Senator.
+       He knows the importance and power of faith.
+       In these uncertain and changing times <font color=\"green\">Erik Fleming can guide us to a better more secure future for our families.
+       Believe in Erik Fleming.
+       He will lead us in the right direction.</font>
+       [Erik Fleming]: \"I'm Erik Fleming and I approve this message.\"
        [PFB]: THE FLEMING FOR US SENATE CAMPAIGN COMMITTEE  (10)",
-       "The correct answer is Ad 1. 
-       It attacks the candidate in question, Mark Udall, by describing him as having \"a shortage of truth,\" and claiming he is \"not honest about his past.\" 
-       Ad 2 is positive about the advertisement's subject, Erik Fleming. 
+    "The correct answer is Ad 1.
+       It attacks the candidate in question, Mark Udall, by describing him as having \"a shortage of truth,\" and claiming he is \"not honest about his past.\"
+       Ad 2 is positive about the advertisement's subject, Erik Fleming.
        It calls him \"a leader you can believe in,\" and promises \"he will lead us in the right direction.\""
   ),
-  list("[Tobie Shramek]: \"Some folks in Congress thought that our soldiers on the front line deserved a salary bonus and that our veterans deserve first-class healthcare and educational opportunity. 
-       <font color=\"red\">Roger Wicker voted against salary bonuses for our troops in Iraq and voted to cut veterans' benefits dozens of times. 
-       Roger Wicker voted nine times to raise his own pay.</font> Let me repeat that. 
-       Roger Wicker voted nine times to raise his own pay. That doesn't seem right.\" 
-       [Announcer]: The Democratic Senatorial Campaign Committee is responsible for the content of this advertising. 
+  list(
+    "[Tobie Shramek]: \"Some folks in Congress thought that our soldiers on the front line deserved a salary bonus and that our veterans deserve first-class healthcare and educational opportunity.
+       <font color=\"red\">Roger Wicker voted against salary bonuses for our troops in Iraq and voted to cut veterans' benefits dozens of times.
+       Roger Wicker voted nine times to raise his own pay.</font> Let me repeat that.
+       Roger Wicker voted nine times to raise his own pay. That doesn't seem right.\"
+       [Announcer]: The Democratic Senatorial Campaign Committee is responsible for the content of this advertising.
        [PFB]: DEMOCRATIC SENATORIAL CAMPAIGN COMMITTEE",
-       "[Announcer]: Ronnie Musgrove's road to Washington? Proceed with great caution. 
-       As Governor, <font color=\"red\">Musgrove recked the economy, lost 38,00 jobs and racked up a $700 million deficit. 
-       Musgrove steered us into the Beef Plant Scandal, left us a $55 million bill.</font> 
-       And his biggest contributors? <font color=\"red\">Indicted for attempted bribery. Failures. Scandals. Dead ends. 
-       We just can't afford another wrong turn with Ronnie Musgrove.</font> 
-       The National Republican Senatorial Committee is responsible for the content of this ad. 
-       [PFB]: NATIONAL REPUBLICAN SENATORIAL COMMITTEE", 
-       "The correct answer is Ad 2. 
-       Though Ad 1 criticizes the candidate for having \"voted against salary bonuses for our troops,\" Ad 2 is more critical of its candidate. 
+    "[Announcer]: Ronnie Musgrove's road to Washington? Proceed with great caution.
+       As Governor, <font color=\"red\">Musgrove recked the economy, lost 38,00 jobs and racked up a $700 million deficit.
+       Musgrove steered us into the Beef Plant Scandal, left us a $55 million bill.</font>
+       And his biggest contributors? <font color=\"red\">Indicted for attempted bribery. Failures. Scandals. Dead ends.
+       We just can't afford another wrong turn with Ronnie Musgrove.</font>
+       The National Republican Senatorial Committee is responsible for the content of this ad.
+       [PFB]: NATIONAL REPUBLICAN SENATORIAL COMMITTEE",
+    "The correct answer is Ad 2.
+       Though Ad 1 criticizes the candidate for having \"voted against salary bonuses for our troops,\" Ad 2 is more critical of its candidate.
        It claims that Musgrove \"recked[sic] the economy\" and implicates him in the \"attempted bribery\" and indictment of his \"biggest contributors.\""
   )
 )
@@ -195,37 +208,39 @@ PracticeQuestions = list(
 The test_questions argument requires an object of a format similar to that used in practice_questions. It contains the contents of test questions used to evaluate whether workers pass your qualification test. As before, the primary list contains a series of sub-lists, one for each test question. Each sub-list is comprised of three elements. The first and second elements are strings, which contain the texts for documents 1 and 2 of a pairwise comparison, respectively. The third element is a numeric integer indicating which element of the list is the correct answer.
 
 ```{r TestQuestions, eval = F}
-TestQuestions = list(
+TestQuestions <- list(
   list(
-    "[Announcer]: Major newspapers across the state are endorsing Kay Hagan for U.S. Senate, calling Hagan a bundle of brains and energy. 
-    A businesswoman, mother of three, Kay's ranked one of North Carolina's ten most effective senators. 
-    With a moderate and business-friendly record, her priorities include fiscal responsibility, investing in education, healthcare reform and new energy development. 
-    Kay Hagan. Exactly the change our economy needs. 
-    [Kay Hagan]: \"I'm Kay Hagan, and I approve this message.\" 
+    "[Announcer]: Major newspapers across the state are endorsing Kay Hagan for U.S. Senate, calling Hagan a bundle of brains and energy.
+    A businesswoman, mother of three, Kay's ranked one of North Carolina's ten most effective senators.
+    With a moderate and business-friendly record, her priorities include fiscal responsibility, investing in education, healthcare reform and new energy development.
+    Kay Hagan. Exactly the change our economy needs.
+    [Kay Hagan]: \"I'm Kay Hagan, and I approve this message.\"
     [PFB]: HAGAN SENATE COMMITTEE, INC.",
-    "[Announcer]: Liberal Mary Landrieu: she supported amnesty for illegal immigrants, a plan that could have cost taxpayers 126 billion and require some immigrant workers to paid more than Americans for doing the same job. 
-    Liberal Mary Landrieu voted to allow immigrants to collect Social Security benefits for work done illegally. 
-    When it comes to immigration, Mary Landrieu is on the wrong side of the fence. 
-    The National Republican Senatorial Committee is responsible for the content of this advertising. 
+    "[Announcer]: Liberal Mary Landrieu: she supported amnesty for illegal immigrants, a plan that could have cost taxpayers 126 billion and require some immigrant workers to paid more than Americans for doing the same job.
+    Liberal Mary Landrieu voted to allow immigrants to collect Social Security benefits for work done illegally.
+    When it comes to immigration, Mary Landrieu is on the wrong side of the fence.
+    The National Republican Senatorial Committee is responsible for the content of this advertising.
     [PFB]: NATIONAL REPUBLICAN SENATORIAL COMMITTEE",
-    2),
+    2
+  ),
   list(
-    "[Jim Martin]: \"I'm Jim Martin, and I approve this message.\" 
-    [Announcer]: Saxby Chambliss says Congress had to act, but why did they have to act? 
-    It was Saxby Chambliss who voted to deregulate Wall Street speculators. 
-    Saxby Chambliss took hundreds of thousands of dollars from Wall Street, and voted to let them do whatever they wanted. 
-    He voted to give them billions more in tax breaks, and what happened? 
-    A $700 billion taxpayer bailout, and a trillion dollar deficit. Saxby economics at the root of the problem. 
+    "[Jim Martin]: \"I'm Jim Martin, and I approve this message.\"
+    [Announcer]: Saxby Chambliss says Congress had to act, but why did they have to act?
+    It was Saxby Chambliss who voted to deregulate Wall Street speculators.
+    Saxby Chambliss took hundreds of thousands of dollars from Wall Street, and voted to let them do whatever they wanted.
+    He voted to give them billions more in tax breaks, and what happened?
+    A $700 billion taxpayer bailout, and a trillion dollar deficit. Saxby economics at the root of the problem.
     [PFB]: MARTIN FOR SENATE &amp; DEMOCRATIC PARTY OF GEORGIA",
-    "[Mark Warner]: \"I will not raise your taxes.\" 
-    [Announcer #1]: Mark Warner broke his word and gave us the largest tax increase in Virginia history. 
-    [Announcer #2]: Campaigning with Barack Obama, now Warner's talking even higher taxes, bigger spending and limiting domestic oil production, costing you more. 
-    [Announcer #1]: We need Jim Gilmore in the U.S. Senate and so does John McCain. 
-    Veterans who will keep America safe, keep taxes low and bring down gas prices. 
-    [Announcer #2]: Principled. Honest. Jim Gilmore. 
-    [Jim Gilmore]: \"I'm Jim Gilmore, candidate for the U.S. Senate, and I approve this message.\" 
+    "[Mark Warner]: \"I will not raise your taxes.\"
+    [Announcer #1]: Mark Warner broke his word and gave us the largest tax increase in Virginia history.
+    [Announcer #2]: Campaigning with Barack Obama, now Warner's talking even higher taxes, bigger spending and limiting domestic oil production, costing you more.
+    [Announcer #1]: We need Jim Gilmore in the U.S. Senate and so does John McCain.
+    Veterans who will keep America safe, keep taxes low and bring down gas prices.
+    [Announcer #2]: Principled. Honest. Jim Gilmore.
+    [Jim Gilmore]: \"I'm Jim Gilmore, candidate for the U.S. Senate, and I approve this message.\"
     [PFB]: REPUBLICAN PARTY OF VIRGINIA",
-    1)
+    1
+  )
 )
 ```
 
@@ -234,12 +249,18 @@ When the correctly-formatted arguments are supplied to formatTest, the function 
 If you choose to manually edit the .xml files, you can re-load them into R with the following code, provided that QualTest.xml and AnswerKey.xml are still in your working directory.
 
 ```{r ReLoadXML, eval = F}
-TestQuestions <- paste0(readLines("QualTest.xml",
-                                  warn = FALSE),
-                        collapse = "")
-TestKey <- paste0(readLines("AnswerKey.xml", 
-                            warn = FALSE),
-                  collapse = "")
+TestQuestions <- paste0(
+  readLines("QualTest.xml",
+    warn = FALSE
+  ),
+  collapse = ""
+)
+TestKey <- paste0(
+  readLines("AnswerKey.xml",
+    warn = FALSE
+  ),
+  collapse = ""
+)
 ```
 
 Otherwise, if using the default files generated from formatTest, you can access the files directly from the object to which formatTest's output is assigned.
@@ -247,15 +268,17 @@ Otherwise, if using the default files generated from formatTest, you can access 
 With a properly formatted qualification test and answer key, you are ready to create a qualification with the desired properties. The below code accomplishes this using pyMTurkR::CreateQualificationType. It takes the following arguments: name, a string which provides a title for the qualification that is visible to both you and to workers; description, a string explaining the purpose of the qualification; status, a string indicating whether the qualification should be active (I recommend using this) or inactive; test and answer key, which take the XML-formatted strings created from formatTest; test.duration, a numeric integer that governs the time (in seconds) in which workers are allowed to complete the test; and retry.delay, a numeric integer determining how long workers have to wait to retake the test (when NULL, workers may not ever retake the test).
 
 ```{r MakeQual, eval = F}
-Description <- 'Qualifies workers to participate in Compare Senate Ads HITs'
+Description <- "Qualifies workers to participate in Compare Senate Ads HITs"
 
-QualificationWithTest <- CreateQualificationType(name = 'Compare Senate Ads',
-                                                 description = Description,
-                                                 status = 'Active',
-                                                 test = QualTest$Questions,
-                                                 answerkey = QualTest$Answers,
-                                                 test.duration = 60 * 60, 
-                                                 retry.delay = NULL)
+QualificationWithTest <- CreateQualificationType(
+  name = "Compare Senate Ads",
+  description = Description,
+  status = "Active",
+  test = QualTest$Questions,
+  answerkey = QualTest$Answers,
+  test.duration = 60 * 60,
+  retry.delay = NULL
+)
 ```
 
 To view your qualification test, you will need to access it from a created HIT. To do so, first make sure that you are in sandbox mode. Second, follow the instructions below on how to create a HIT. When creating the HIT in the MTurk dashboard, make sure to include your custom qualification among the qualifications required to complete your HIT. Third, post the HIT (a single HIT is sufficient) to MTurk's sandbox environment. Fourth, log into the sandbox as a worker, and search for the HIT you posted. In the information displaye for that HIT will be a link to the qualification test. Fifth, click on the link and inspect your qualification test. 
@@ -268,28 +291,31 @@ Once your qualification has been created, you may proceed to creating and format
 
 ```{r formatHIT, eval = F}
 # if Text is not yet loaded...
-#data("Text")
-HIT_code <- formatHIT(question_prompt = 'Which ad is most negative?',
-                      short_instruction_list = Text$ShortInstructions,
-                      instruction_overview = Text$InstructionOverview,
-                      instruction_list = Text$InstructionList,
-                      closing_message = Text$ClosingMessage)
+# data("Text")
+HIT_code <- formatHIT(
+  question_prompt = "Which ad is most negative?",
+  short_instruction_list = Text$ShortInstructions,
+  instruction_overview = Text$InstructionOverview,
+  instruction_list = Text$InstructionList,
+  closing_message = Text$ClosingMessage
+)
 ```
 
 The question_prompt argument take a string that reminds workers of their task. Remember, any workers participating in your HITs has completed training through your qualification test, and so should be familiar with the task at hand. As such, the question prompt can be reduced from its form in the qualification test if desired. The short_instruction_list argument takes another specially-formatted list object. The object's content will render brief instructions in a left-hand sidebar next to each pariwise comparison. The brief instructions will appear as a bulleted list (of dashes) containing simplified instruction or examples. Each element of the primary list is a sub-list. The first element of the sub-list is a string that will be rendered as a sub-title (HTML h3 tag) in the list. This can be left blank using empty quotes. Subsequent elements of the sub-list are strings, each of which will receive a separate bullet (dash). An example, also available in Text object found in data("Text"), is shown below.
 
 ```{r ShortInstructionList, eval = F}
-ShortInstructions = list(
+ShortInstructions <- list(
   list(
-    '',
-    'If both are negative pick the most negative',
-    'If both are positive pick the least positive'
-    ),
-  list('What makes an ad more negative?',
-       'It attacks a candidates character instead of their policy record',
-       'It only attacks a candidate without comparing them to another candidate'
-       )
+    "",
+    "If both are negative pick the most negative",
+    "If both are positive pick the least positive"
+  ),
+  list(
+    "What makes an ad more negative?",
+    "It attacks a candidates character instead of their policy record",
+    "It only attacks a candidate without comparing them to another candidate"
   )
+)
 ```
 
 Finally, the instruction_overview, instruction_list, and closing_message arguments of formatHIT should take the same objects used in formatTest. Workers may click a link in the sidebar of each HIT that shows them a set of full instructions. Since you created detailed instructions for your qualification test, you should repeat those here so that workers receive consistent instructions throughout.
@@ -307,37 +333,58 @@ n_docs <- 4 # number of example documents
 n_comparisons <- 2 # number of comparisons
 n_comparisons_per_doc <- 2
 # create the documents
-Documents <- data.frame(doc_ids = 1:n_docs,
-                        doc_text = paste('test document', 1:n_docs))
+Documents <- data.frame(
+  doc_ids = 1:n_docs,
+  doc_text = paste("test document", 1:n_docs)
+)
 # assign pairwise comparisons by doc id
-CompareDocs <- matrix(sample(x = Documents$doc_ids,
-                                    size = n_comparisons*2),
-                             ncol = n_comparisons_per_doc)
+CompareDocs <- matrix(
+  sample(
+    x = Documents$doc_ids,
+    size = n_comparisons * 2
+  ),
+  ncol = n_comparisons_per_doc
+)
 # assign pairwise comparisons by doc text
 Comparisons <- t(apply(CompareDocs, 1, function(x) Documents$doc_text[x]))
 
-current_HITs <- sendComparisons(hit_type = '123XYZ', # HIT type id from MTurk requester dashboard
-                                hit_layout = 'ABC500', # HIT layout id from MTurk requester dashboard
-                                comparisons_to_send = Comparisons)
+current_HITs <- sendComparisons(
+  hit_type = "123XYZ", # HIT type id from MTurk requester dashboard
+  hit_layout = "ABC500", # HIT layout id from MTurk requester dashboard
+  comparisons_to_send = Comparisons
+)
 ```
 
 > **_A note on cancelling HITs_** Though it is recommended that you conduct thorough testing in sandbox mode before posting actual work to MTurk, accidents do happen. In the event of a catastrophic mishap, you can manually expire HITs that have been uploaded to MTurk by using `DisableHIT(hit = current_HITs)`. This will disable HITs within the passed vector of HIT IDs from being completed by workers, though you will still be charged for work which was completed before the manual expiration. You should refer to that function's documentation for additional details.
 
+### Checking HIT Status
+
+Note that the sendComparisons() function differs from manually creating HITs from the MTurk console. labelR wraps the createHIT() function from PyMTurkR, which creates HITs individually to correspond to each comparison for all comparisons to be sent. The IDs for each HIT are stored in a character vector to replicate the structure of a batch that is made automatically 
+when manually publishing HITs from the console. Created HITs using labelR will not be visible on the Requester console. To check the status of the HITs generated by labelR, you must loop the getHIT() function through each IDs stored in the current\_HITs character vector. The function will return a dataframe for each HIT and describe the settings, status, and any available summary data for the HIT.
+Incomplete HITs will not be accessible to getResults.
+
+
 ### Retrieving HITs from MTurk
 
-Once your HITs have been uploaded for completion, the next step is to download the completed work. This is done using the getResults function, which provides live status updates on completed work, downloads results, and formats the results in a convenient dataframe. Its current_batch_id argument takes a numeric integer. If running multiple rounds of pairwise comparisons, you can change the batch id each time to distinguish results across batches. The current_hit_ids argument takes the vector of HIT IDs returned from sendComparisons, and is used to query MTurk for the desired results. The current_document_ids argument takes a matrix with the same dimensions as the object supplied to the comparisons_to_send argument in sendComparisons. Though you may directly pass that object here, it is recommended that you use a matrix of corresponding document identifiers instead of the full document text (note the distinction between the CompareDocs and Comparisons objects created in the above sendComparisons example). When retry = T, the function will continuously run in the R console providing live updates on the percentage of completed work until all work is complete and the full results are downloaded. When FALSE, the function will execute once, printing the percentage of completed results and downloading those results. The retry_in_seconds argument takes a numeric integer that governs how long (in seconds) the function should wait before trying to download the results again.
+Since manually created HITs views the specific collection of input data the Requester uploads as a discrete, each time a Requester publishes the HITs through the console, a new assignment is generated for the viewer to access with distinct parameters. All results submitted by workers 
+will be recorded on the console as a batch, where each batch is distinct to each assignment. However, all created HITs sent through labelR will have identical parameters, which results in all new HITs essentially being published to the same location indiscriminantly. Workers will only see one assignment that updates whenever a new HIT has been sent.This renders distinction between queried results that belong to different discrete collections of comparisons difficult.
+
+The getResults function replicates batch organization using user assigned unique numerical batch IDs to tag queried results for differentiation.The current\_document\_ids argument takes a matrix with the same dimensions as the object supplied to the comparisons\_to\_send argument in sendComparisons. Though you may directly pass that object here, it is recommended that you use a matrix of corresponding document identifiers instead of the full document text (note the distinction between the CompareDocs and Comparisons objects created in the above sendComparisons example). When retry = T, the function will continuously run in the R console and repetitively query MTurk until at least one submission has been made for all HIT IDs. When FALSE, the function will execute once, printing the fraction of completed results. The retry\_in\_seconds argument takes a numeric integer that governs how long (in seconds) the function should wait before querying from MTurk again.
 
 ```{r getResults, eval = F}
-Results <- getResults(current_batch_id = batch_id,
-                      current_hit_ids = current_HITs, 
-                      current_document_ids = CompareDocs,
-                      retry = T, 
-                      retry_in_seconds = 60)
+Results <- getResults(
+  current_batch_id = batch_id,
+  current_hit_ids = current_HITs,
+  current_document_ids = CompareDocs,
+  retry = T,
+  retry_in_seconds = 60
+)
 ```
 
 ### Auditing Workers
 
-The final step in the data labeling workflow is to audit worker quality. The auditWorkers function uses sentimentIt::fitStan to evaluate worker quality. The specifics of this method are available in the function's documentation. The auditWorkers function takes one primary argument, current_experiment_results, which takes a data.frame as formatted by the getResults function. The function prints, for each worker, an MTurk ID, a posterior mean from sentimentIt::fitStan, and the number of HITs they completed. There is also an optional argument, reference_results, which takes a similarly formatted data.frame, but which contains "gold standard" comparisons that you know are correct. Supplying this argument will contribute to estimating worker quality, but will not include the worker IDs for workers who are exclusively in the gold standard set in the function's output.
+The final step in the data labeling workflow is to audit worker quality. The auditWorkers function uses the fitStan function to evaluate worker quality. The specifics of this method are available in the function’s documentation. The auditWorkers function takes one primary argument, current\_experiment\_results, which takes a data.frame as formatted by the getResults function. The function prints, for each worker, an MTurk ID, a posterior mean from fitStan, and the number of HITs they completed. There is also an optional argument, reference\_results, which takes a similarly formatted data.frame, but which contains “gold standard” comparisons that you know are correct. Supplying this argument will contribute to estimating worker quality, but will not include the worker IDs for workers who are exclusively in the gold standard set in the function’s output.
+Note that your sample size must be reasonably large enough for this function to return meaningful results. 
 
 ```{r auditWorkers,eval = F}
 auditWorkers(current_experiment_results = Results$result)

@@ -32,24 +32,29 @@ sendComparisons <- function(hit_type = NULL,
                             hit_layout = NULL,
                             comparisons_to_send = NULL,
                             expire_in_seconds = as.character(60 * 60 * 8),
-                            n_assignments = '1',
-                            hit_param_names = c('doc1', 'doc2')){
-
+                            n_assignments = "3",
+                            hit_param_names = c("doc1", "doc2")) {
   current_HIT_ids <- rep(NA, nrow(comparisons_to_send))
-  message('Sending task to MTurk')
-  for(i in 1:nrow(comparisons_to_send)){
+  message("Sending task to MTurk")
+  for (i in 1:nrow(comparisons_to_send)) {
     hit_params <- list()
-    for(j in 1:length(hit_param_names)){
-      hit_params[[j]] <- list(Name = hit_param_names[j],
-                              Value = comparisons_to_send[i, j])
+    for (j in 1:length(hit_param_names)) {
+      hit_params[[j]] <- list(
+        Name = hit_param_names[j],
+        Value = comparisons_to_send[i, j]
+      )
+      print(hit_params[[j]])
     }
-    current_HIT_ids[i] <- suppressMessages(CreateHIT(hit.type = hit_type,
-                                                     hitlayoutid = hit_layout,
-                                                     hitlayoutparameters = hit_params,
-                                                     assignments = n_assignments,
-                                                     expiration = expire_in_seconds,
-                                                     #annotation = batch_annotation,
-                                                     verbose = FALSE))$HITId
+    current_HIT_ids[i] <- suppressMessages(CreateHIT(
+      hit.type = hit_type,
+      hitlayoutid = hit_layout,
+      hitlayoutparameters = hit_params,
+      assignments = n_assignments,
+      expiration = expire_in_seconds,
+      # annotation = batch_annotation,
+      verbose = FALSE
+    ))$HITId
+     print(current_HIT_ids)
   }
   return(current_HIT_ids)
 }

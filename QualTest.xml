@@ -1,0 +1,350 @@
+<QuestionForm xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/QuestionForm.xsd">
+     <Overview>
+       <Title>
+Completing this training module qualifies you to complete Compare Senate Ads HITs
+</Title>
+         <FormattedContent><![CDATA[<h2>Instructions</h2><p>
+This task involves reading the text of two television advertisements aired during the 2008 U.S. Senate elections. 
+Researchers will use your responses to better understand the "tone" of each political ad.
+<br></br>
+<b>Your job is to read the text of both ads and select the ad that is either most negative (or least positive) towards the candidate(s) mentioned.</b>
+<br></br>
+<b>Your performance will be monitored as you complete these HITs. 
+We will reject all work done by workers who provide poor quality answers.</b>
+<br></br>
+Do not allow your own political opinions to influence your decisions. 
+Your goal is to select the ad that other workers would recognize as the most negative (or least positive).
+</p> <h2>Here are a few rules of thumb to guide you</h2><ul><li>If both advertisements attack a candidate, pick whichever of the two advertisements is most negative</li><li>If both advertisements praise a candidate, pick whichever of the two advertisements is least positive</li><li>Ads that attack a candidate's personal characteristics are generally more negative than ads that  attack a candidate's record or job performance<ul><li>"Bob is dishonest" is more negative than "Bob is too liberal"</li></ul></li><li>Ads that attack an individual are generally more negative than ads that attack a group<ul><li>"Bob is a Washington fat cat" is more negative than "We need to stop the fat cats in Washington"</li></ul></li><li>Ads that attack a specific candidate alone are generally more negative than ads that contrast two candidates<ul><li>"Bob is unqualified" is more negative than "Bob is unqualified, but Jill is very experienced"</li></ul></li><li>Ads that state a policy position are generally less positive than ads that praise a candidate as a person<ul><li>"Bob will fix unemployment" is less positive than "Bob is a leader"</li></ul></li></ul>]]></FormattedContent>
+      </Overview>
+      <Overview>
+        <FormattedContent><![CDATA[
+          <br></br>
+          <h2>The next 3 questions are example HITs</h2><p>
+We will highlight the important text and provide you with the correct answer. 
+These will not be scored and will not count for or against your Compare Senate Ads qualification.
+</p><br></br>]]></FormattedContent>
+      </Overview><Question>
+     <QuestionIdentifier>Example1</QuestionIdentifier>
+     <DisplayName>E1</DisplayName>
+     <IsRequired>false</IsRequired>
+     <QuestionContent>
+       <Text> Example 1: 
+Please read the two advertisement texts below. 
+Your job is to read both and select the ad that is most negative (or least positive) towards the candidate(s) mentioned.
+</Text>
+     </QuestionContent>
+     <AnswerSpecification>
+       <SelectionAnswer>
+       <StyleSuggestion>radiobutton</StyleSuggestion>
+         <Selections>
+           <Selection>
+           <SelectionIdentifier>left</SelectionIdentifier><FormattedContent><![CDATA[<p>[Announcer]: Mark Udall claims he voted for tax cuts 65 times. 
+       [Reporter]: "Actually it's not true." 
+       [Mark Udall]: "I'm just kidding." Udall claims that now he supports our troops, drilling off shore, bi-partisanship. 
+       [Mark Udall]: "I'm just kidding." 
+       [Announcer]: But through his career he has opposed them all. <font color="red">Udall has a lot of ads, but a shortage of truth.</font> 
+       [Mark Udall]: "I'm just kidding." 
+       [Announcer]: <font color="red">Mark Udall is not honest about his past</font> and now it's catching up with him. 
+       The National Republican Senatorial Committee is responsible for the content of this advertising. 
+       [PFB]: NATIONAL REPUBLICAN SENATORIAL COMMITTEE  (9)</p>]]></FormattedContent></Selection>
+           <Selection>
+           <SelectionIdentifier>right</SelectionIdentifier><FormattedContent><![CDATA[<p>[Announcer]: You want a leader you can believe in, who shares your values, and vision for the future. 
+       On March 11th vote Erik Fleming for United States Senator. 
+       He knows the importance and power of faith. 
+       In these uncertain and changing times <font color="green">Erik Fleming can guide us to a better more secure future for our families. 
+       Believe in Erik Fleming. 
+       He will lead us in the right direction.</font> 
+       [Erik Fleming]: "I'm Erik Fleming and I approve this message." 
+       [PFB]: THE FLEMING FOR US SENATE CAMPAIGN COMMITTEE  (10)</p>]]></FormattedContent></Selection>
+         </Selections>
+       </SelectionAnswer>
+     </AnswerSpecification>
+   </Question><Overview>
+            <FormattedContent><![CDATA[
+            <b>Answer: The correct answer is Ad 1. 
+       It attacks the candidate in question, Mark Udall, by describing him as having "a shortage of truth," and claiming he is "not honest about his past." 
+       Ad 2 is positive about the advertisement's subject, Erik Fleming. 
+       It calls him "a leader you can believe in," and promises "he will lead us in the right direction."</b>]]></FormattedContent>
+          </Overview><Question>
+     <QuestionIdentifier>Example2</QuestionIdentifier>
+     <DisplayName>E2</DisplayName>
+     <IsRequired>false</IsRequired>
+     <QuestionContent>
+       <Text> Example 2: 
+Please read the two advertisement texts below. 
+Your job is to read both and select the ad that is most negative (or least positive) towards the candidate(s) mentioned.
+</Text>
+     </QuestionContent>
+     <AnswerSpecification>
+       <SelectionAnswer>
+       <StyleSuggestion>radiobutton</StyleSuggestion>
+         <Selections>
+           <Selection>
+           <SelectionIdentifier>left</SelectionIdentifier><FormattedContent><![CDATA[<p>[Tobie Shramek]: "Some folks in Congress thought that our soldiers on the front line deserved a salary bonus and that our veterans deserve first-class healthcare and educational opportunity. 
+       <font color="red">Roger Wicker voted against salary bonuses for our troops in Iraq and voted to cut veterans' benefits dozens of times. 
+       Roger Wicker voted nine times to raise his own pay.</font> Let me repeat that. 
+       Roger Wicker voted nine times to raise his own pay. That doesn't seem right." 
+       [Announcer]: The Democratic Senatorial Campaign Committee is responsible for the content of this advertising. 
+       [PFB]: DEMOCRATIC SENATORIAL CAMPAIGN COMMITTEE</p>]]></FormattedContent></Selection>
+           <Selection>
+           <SelectionIdentifier>right</SelectionIdentifier><FormattedContent><![CDATA[<p>[Announcer]: Ronnie Musgrove's road to Washington? Proceed with great caution. 
+       As Governor, <font color="red">Musgrove recked the economy, lost 38,00 jobs and racked up a $700 million deficit. 
+       Musgrove steered us into the Beef Plant Scandal, left us a $55 million bill.</font> 
+       And his biggest contributors? <font color="red">Indicted for attempted bribery. Failures. Scandals. Dead ends. 
+       We just can't afford another wrong turn with Ronnie Musgrove.</font> 
+       The National Republican Senatorial Committee is responsible for the content of this ad. 
+       [PFB]: NATIONAL REPUBLICAN SENATORIAL COMMITTEE</p>]]></FormattedContent></Selection>
+         </Selections>
+       </SelectionAnswer>
+     </AnswerSpecification>
+   </Question><Overview>
+            <FormattedContent><![CDATA[
+            <b>Answer: The correct answer is Ad 2. 
+       Though Ad 1 criticizes the candidate for having "voted against salary bonuses for our troops," Ad 2 is more critical of its candidate. 
+       It claims that Musgrove "recked[sic] the economy" and implicates him in the "attempted bribery" and indictment of his "biggest contributors."</b>]]></FormattedContent>
+          </Overview><Question>
+     <QuestionIdentifier>Example3</QuestionIdentifier>
+     <DisplayName>E3</DisplayName>
+     <IsRequired>false</IsRequired>
+     <QuestionContent>
+       <Text> Example 3: 
+Please read the two advertisement texts below. 
+Your job is to read both and select the ad that is most negative (or least positive) towards the candidate(s) mentioned.
+</Text>
+     </QuestionContent>
+     <AnswerSpecification>
+       <SelectionAnswer>
+       <StyleSuggestion>radiobutton</StyleSuggestion>
+         <Selections>
+           <Selection>
+           <SelectionIdentifier>left</SelectionIdentifier><FormattedContent><![CDATA[<p>[Announcer]: Democrat Ron Wyden, Republican Gordon Smith. 
+       [Ron Wyden]: "It's a question of finding common ground, and <font color="red">Senator Smith, my friend, my partner, always meets me half way."</font> 
+       [Announcer]: <font color="red">Working together for the economy. For healthcare.</font> 
+       The Statesman Journal calls them, <font color="red">a roll model for Congress.</font> 
+       Gordon Smith, Ron Wyden, common ground for the common good. 
+       [Gordon Smith]: "I'm Gordon Smith, and I approve working together across party lines, and this ad." 
+       [PFB]: FRIENDS OF GORDON SMITH</p>]]></FormattedContent></Selection>
+           <Selection>
+           <SelectionIdentifier>right</SelectionIdentifier><FormattedContent><![CDATA[<p>[Mark Begich]: "For years, Alaska's been a leading producer of oil and gas, while we've been paying the highest energy prices in the country. 
+       I'm Mark Begich, and that's gone on for way too long. 
+       I'll fight in the Senate not just for ANWR, the gas pipeline or renewable energy, but also to expand Alaska's refining capacity. 
+       We should be getting cheaper gas from our own oil and get the same oil royalties as Louisiana's getting. 
+       I approve this message because we produce it, and we should pay less." 
+       [PFB]: ALASKANS FOR BEGICH</p>]]></FormattedContent></Selection>
+         </Selections>
+       </SelectionAnswer>
+     </AnswerSpecification>
+   </Question><Overview>
+            <FormattedContent><![CDATA[
+            <b>Answer: The correct answer is Ad 2. 
+       Though neither ad criticizes a candidate, Ad 1 supports the candidate's bipartisanship. 
+       Ad 2 is only a campaign promise from the candidate, and therefore lacks the same supportive language as Ad 1, making it the more negative advertisement by default.</b>]]></FormattedContent>
+          </Overview><Overview>
+        <FormattedContent><![CDATA[
+          <br></br>
+          <h2>The next 6 questions are your test HITs.</h2><p>
+You must answer those questions using only the instructions and examples provided above. 
+You must answer at least 5 of the test HITs correctly to receive the Compare Senate Ads qualification.
+</p><br></br>]]></FormattedContent>
+       </Overview><Question>
+     <QuestionIdentifier>Test1</QuestionIdentifier>
+     <DisplayName>T1</DisplayName>
+     <IsRequired>true</IsRequired>
+     <QuestionContent>
+       <Text> Test 1: 
+Please read the two advertisement texts below. 
+Your job is to read both and select the ad that is most negative (or least positive) towards the candidate(s) mentioned.
+</Text>
+     </QuestionContent>
+     <AnswerSpecification>
+       <SelectionAnswer>
+       <StyleSuggestion>radiobutton</StyleSuggestion>
+         <Selections>
+           <Selection>
+           <SelectionIdentifier>left</SelectionIdentifier><FormattedContent><![CDATA[<p>[Announcer]: Major newspapers across the state are endorsing Kay Hagan for U.S. Senate, calling Hagan a bundle of brains and energy. 
+    A businesswoman, mother of three, Kay's ranked one of North Carolina's ten most effective senators. 
+    With a moderate and business-friendly record, her priorities include fiscal responsibility, investing in education, healthcare reform and new energy development. 
+    Kay Hagan. Exactly the change our economy needs. 
+    [Kay Hagan]: "I'm Kay Hagan, and I approve this message." 
+    [PFB]: HAGAN SENATE COMMITTEE, INC.</p>]]></FormattedContent></Selection>
+           <Selection>
+           <SelectionIdentifier>right</SelectionIdentifier><FormattedContent><![CDATA[<p>[Announcer]: Liberal Mary Landrieu: she supported amnesty for illegal immigrants, a plan that could have cost taxpayers 126 billion and require some immigrant workers to paid more than Americans for doing the same job. 
+    Liberal Mary Landrieu voted to allow immigrants to collect Social Security benefits for work done illegally. 
+    When it comes to immigration, Mary Landrieu is on the wrong side of the fence. 
+    The National Republican Senatorial Committee is responsible for the content of this advertising. 
+    [PFB]: NATIONAL REPUBLICAN SENATORIAL COMMITTEE</p>]]></FormattedContent></Selection>
+         </Selections>
+       </SelectionAnswer>
+     </AnswerSpecification>
+   </Question><Question>
+     <QuestionIdentifier>Test2</QuestionIdentifier>
+     <DisplayName>T2</DisplayName>
+     <IsRequired>true</IsRequired>
+     <QuestionContent>
+       <Text> Test 2: 
+Please read the two advertisement texts below. 
+Your job is to read both and select the ad that is most negative (or least positive) towards the candidate(s) mentioned.
+</Text>
+     </QuestionContent>
+     <AnswerSpecification>
+       <SelectionAnswer>
+       <StyleSuggestion>radiobutton</StyleSuggestion>
+         <Selections>
+           <Selection>
+           <SelectionIdentifier>left</SelectionIdentifier><FormattedContent><![CDATA[<p>[Jim Martin]: "I'm Jim Martin, and I approve this message." 
+    [Announcer]: Saxby Chambliss says Congress had to act, but why did they have to act? 
+    It was Saxby Chambliss who voted to deregulate Wall Street speculators. 
+    Saxby Chambliss took hundreds of thousands of dollars from Wall Street, and voted to let them do whatever they wanted. 
+    He voted to give them billions more in tax breaks, and what happened? 
+    A $700 billion taxpayer bailout, and a trillion dollar deficit. Saxby economics at the root of the problem. 
+    [PFB]: MARTIN FOR SENATE &amp; DEMOCRATIC PARTY OF GEORGIA</p>]]></FormattedContent></Selection>
+           <Selection>
+           <SelectionIdentifier>right</SelectionIdentifier><FormattedContent><![CDATA[<p>[Mark Warner]: "I will not raise your taxes." 
+    [Announcer #1]: Mark Warner broke his word and gave us the largest tax increase in Virginia history. 
+    [Announcer #2]: Campaigning with Barack Obama, now Warner's talking even higher taxes, bigger spending and limiting domestic oil production, costing you more. 
+    [Announcer #1]: We need Jim Gilmore in the U.S. Senate and so does John McCain. 
+    Veterans who will keep America safe, keep taxes low and bring down gas prices. 
+    [Announcer #2]: Principled. Honest. Jim Gilmore. 
+    [Jim Gilmore]: "I'm Jim Gilmore, candidate for the U.S. Senate, and I approve this message." 
+    [PFB]: REPUBLICAN PARTY OF VIRGINIA</p>]]></FormattedContent></Selection>
+         </Selections>
+       </SelectionAnswer>
+     </AnswerSpecification>
+   </Question><Question>
+     <QuestionIdentifier>Test3</QuestionIdentifier>
+     <DisplayName>T3</DisplayName>
+     <IsRequired>true</IsRequired>
+     <QuestionContent>
+       <Text> Test 3: 
+Please read the two advertisement texts below. 
+Your job is to read both and select the ad that is most negative (or least positive) towards the candidate(s) mentioned.
+</Text>
+     </QuestionContent>
+     <AnswerSpecification>
+       <SelectionAnswer>
+       <StyleSuggestion>radiobutton</StyleSuggestion>
+         <Selections>
+           <Selection>
+           <SelectionIdentifier>left</SelectionIdentifier><FormattedContent><![CDATA[<p>[Announcers]: Mark Pryor brought Republicans and Democrats together to ban unsafe toys from China. 
+    Mark helped pass a new Farm Bill and helped save Arkansas's military bases. 
+    And is working to pass a bipartisan energy plan that drills for more oil and fast tracks alternative fuels to create tomorrow's jobs. 
+    To break our dependence on foreign oil. That's the kind of change we need. 
+    [Mark Pryor]: "I'm Mark Pryor. I approve this ad because we need to work together and do what's best for America." 
+    [PFB]: MARK PRYOR FOR U.S. SENATE</p>]]></FormattedContent></Selection>
+           <Selection>
+           <SelectionIdentifier>right</SelectionIdentifier><FormattedContent><![CDATA[<p>[Vic Vickers]: "I'm Vic Vickers, and I'm running against Ted Stevens to stop corruption. 
+    Big oil committed environmental crimes in Alaska, and Ted Stevens is taking campaign money from big oil while he is under criminal investigation. 
+    I will not accept a single penny from any oil company or special interest. 
+    I approved and paid for this message to ask you to join me in this fight to take back Alaska." 
+    [PFB]: VIC VICKERS FOR U.S. SENATE COMMITTEE</p>]]></FormattedContent></Selection>
+         </Selections>
+       </SelectionAnswer>
+     </AnswerSpecification>
+   </Question><Question>
+     <QuestionIdentifier>Test4</QuestionIdentifier>
+     <DisplayName>T4</DisplayName>
+     <IsRequired>true</IsRequired>
+     <QuestionContent>
+       <Text> Test 4: 
+Please read the two advertisement texts below. 
+Your job is to read both and select the ad that is most negative (or least positive) towards the candidate(s) mentioned.
+</Text>
+     </QuestionContent>
+     <AnswerSpecification>
+       <SelectionAnswer>
+       <StyleSuggestion>radiobutton</StyleSuggestion>
+         <Selections>
+           <Selection>
+           <SelectionIdentifier>left</SelectionIdentifier><FormattedContent><![CDATA[<p>[Tom Udall]: "Is there anything we can do right now to lower gas prices? 
+    I'm Tom Udall and first, stop hedge fund speculators from driving up the price of oil. 
+    Get oil companies to build new clean refineries in the U.S. to increase supply or take away their tax breaks. 
+    And get serious about alternative energy. 
+    I'm running for the U.S. Senate and I approve this message because record profits for big oil companies, while we pay record prices for gas is wrong." 
+    [PFB]: UDALL FOR U.S. ALL</p>]]></FormattedContent></Selection>
+           <Selection>
+           <SelectionIdentifier>right</SelectionIdentifier><FormattedContent><![CDATA[<p>[Laurie Coleman]: "In a political race, people will say a lot of things. 
+    They'll say Norm is a rubber stamp for the president, but he's been ranked as one of the most independent Senators. 
+    They'll say he's in the pocket of big oil, but he voted to take away their special tax breaks. 
+    Actually, there is a special interest that Norm will answer to. 
+    Hey Norm, will you take out the trash?" 
+    [Norm Coleman]: "I got it, honey. I'm Norm Coleman. I approve this message." 
+    [PFB]: COLEMAN FOR SENATE 08</p>]]></FormattedContent></Selection>
+         </Selections>
+       </SelectionAnswer>
+     </AnswerSpecification>
+   </Question><Question>
+     <QuestionIdentifier>Test5</QuestionIdentifier>
+     <DisplayName>T5</DisplayName>
+     <IsRequired>true</IsRequired>
+     <QuestionContent>
+       <Text> Test 5: 
+Please read the two advertisement texts below. 
+Your job is to read both and select the ad that is most negative (or least positive) towards the candidate(s) mentioned.
+</Text>
+     </QuestionContent>
+     <AnswerSpecification>
+       <SelectionAnswer>
+       <StyleSuggestion>radiobutton</StyleSuggestion>
+         <Selections>
+           <Selection>
+           <SelectionIdentifier>left</SelectionIdentifier><FormattedContent><![CDATA[<p>[Announcer]: After voting for George Bush's whole economic agenda, the 10-trillion-dollar debt, the lax regulation for Wall Street, the outrageous special interest giveaways. 
+    After helping George Bush wreck our economy and our savings, John Sununu voted himself six pay raises. 
+    Now he doesn't just want a raise. He wants six more years. 
+    John Sununu and George Bush. It's time for them both to go. 
+    [Jeanne Shaheen]: "I'm Jeanne Shaheen. I approve this message." 
+    [PFB]: DEMOCRATIC SENATORIAL CAMPAIGN COMMITTEE &amp; JEANNE SHAHEEN</p>]]></FormattedContent></Selection>
+           <Selection>
+           <SelectionIdentifier>right</SelectionIdentifier><FormattedContent><![CDATA[<p>[John Cornyn]: "It shouldn't have happened. Washington only got to work when the answer was too late and too expensive. 
+    We need to hold the guilty parties responsible. 
+    It's time to stop the waste and back room deals, and bring some Texas commonsense to Washington." 
+    [Announcer]: John Cornyn for Texas. 
+    [John Cornyn]: "I'm John Cornyn. I approve this message." 
+    [PFB]: TEXANS FOR SENATOR JOHN CORNYN, INC.</p>]]></FormattedContent></Selection>
+         </Selections>
+       </SelectionAnswer>
+     </AnswerSpecification>
+   </Question><Question>
+     <QuestionIdentifier>Test6</QuestionIdentifier>
+     <DisplayName>T6</DisplayName>
+     <IsRequired>true</IsRequired>
+     <QuestionContent>
+       <Text> Test 6: 
+Please read the two advertisement texts below. 
+Your job is to read both and select the ad that is most negative (or least positive) towards the candidate(s) mentioned.
+</Text>
+     </QuestionContent>
+     <AnswerSpecification>
+       <SelectionAnswer>
+       <StyleSuggestion>radiobutton</StyleSuggestion>
+         <Selections>
+           <Selection>
+           <SelectionIdentifier>left</SelectionIdentifier><FormattedContent><![CDATA[<p>[Jay Rockefeller]: "When I stand up for the good hardworking people of West Virginia I'm never alone. 
+    Together we've brought veterans new health clinics. Fought for clean coal to free us from foreign oil. 
+    Expanded health insurance for children. And, always worked for new and better jobs. 
+    Everyday I know who I'm fighting for, the people of West Virginia. I'm Jay Rockefeller, and I approve this message." 
+    [PFB]: FRIENDS OF JAY ROCKEFELLER</p>]]></FormattedContent></Selection>
+           <Selection>
+           <SelectionIdentifier>right</SelectionIdentifier><FormattedContent><![CDATA[<p>[Woman]: "My husband, Bob, served in Vietnam. My son, Zach, served in Iraq. We're a very patriotic family." 
+    [Announcer]: For our soldiers and veterans, Jay Rockefeller delivers - eight new community outpatient clinics across West Virginia, a nursing home for vets to live in dignity, a new GI Bill for soldiers returning from Iraq. 
+    [Woman]: "Jay Rockefeller has supported the veterans in West Virginia and I think he'll do a lot more." 
+    [Announcer]: Doing more for the people of West Virginia. 
+    Jay Rockefeller wrote the law to provide healthcare for children, to protect coal miners' retirement, develop clean coal technology to free us from foreign oil and his work to bring jobs to West Virginia can be seen across our state. 
+    [Jay Rockefeller]: "If America calls, if the flag calls, West Virginians will be there." 
+    [Woman]: "Jay Rockefeller is someone that my family and all families in West Virginia can count on." 
+    [Jay Rockefeller]: I'm Rockefeller and I approve this message. 
+    [PFB]: FRIENDS OF JAY ROCKEFELLER</p>]]></FormattedContent></Selection>
+         </Selections>
+       </SelectionAnswer>
+     </AnswerSpecification>
+   </Question><Overview>
+        <FormattedContent><![CDATA[
+          <h2>Before you submit your answers...</h2>
+          <br></br>
+          <p><b>You will only have 1 chance to take this test.</b> Make sure that you are satisfied with all of your answers above before submitting.
+          <br></br>
+Please continue to fully read each ad text and provide your best guess of the correct answer. 
+<b>Your performance will be monitored as you complete more HITs. 
+If you provide poor quality answers, all of your work will be rejected and your Compare Senate Ads qualification will be revoked.</b>
+</p>]]></FormattedContent>
+      </Overview>
+  </QuestionForm>

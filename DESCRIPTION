@@ -1,27 +1,61 @@
-Package: labelR
 Type: Package
+Package: labelR
 Title: Pairwise Data Labeling with Amazon's Mechanical Turk
-Version: 0.1.1
+Version: 0.1.2
 Date: 2020-06-02
-Author: Ryden Butler
-Maintainer: Ryden Butler <r.butler@wustl.edu>
-Description: Label data in a pairwise comparison framework by crowdsourcing workers on Amazon's Mechanical Turk platform.
-Depends:
-    R (>= 4.0.3),
-    methods 
+Authors@R: c(
+    person("Ryden", "Butler", , "r.butler@wustl.edu"),
+    person("Binghan", "Zheng", , "zheng.b@wustl.edu", role = "cre")
+  )
+Description: Label data in a pairwise comparison framework by
+    crowdsourcing workers on Amazon's Mechanical Turk platform.
 License: GPL (>= 2)
-RoxygenNote: 7.1.1
+Depends:
+    methods,
+    R (>= 4.0.3)
 Imports:
-  pyMTurkR,
-  sentimentIt,
-  graphics
+    graphics,
+    pyMTurkR,
+    rstan
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
 Collate:
-  'auditWorkers.R'
-  'getResults.R'
-  'sendComparisons.R'
-  'formatAnswer.R'
-  'formatQuestion.R'
-  'formatTest.R'
-  'formatHIT.R'
-  'listify.R'
-  'Text.R'
+    'fitStan.R'
+    'auditWorkers.R'
+    'checkWorkers.R'
+    'formatAnswer.R'
+    'formatHIT.R'
+    'formatQuestion.R'
+    'formatTest.R'
+    'getResults.R'
+    'listify.R'
+    'Text.R'
+    'sendComparisons.R'
+Collate.windows: 
+    'auditWorkers.R'
+    'checkWorkers.R'
+    'formatAnswer.R'
+    'formatHIT.R'
+    'formatQuestion.R'
+    'formatTest.R'
+    'getResults.R'
+    'listify.R'
+    'Text.R'
+    'sendComparisons.R'
+    'fitStan.R'
+Collate.unix: 
+    'auditWorkers.R'
+    'checkWorkers.R'
+    'formatAnswer.R'
+    'formatHIT.R'
+    'formatQuestion.R'
+    'formatTest.R'
+    'getResults.R'
+    'listify.R'
+    'Text.R'
+    'sendComparisons.R'
+    'fitStan.R'

@@ -4,7 +4,7 @@ Title: Pairwise Data Labeling with Amazon's Mechanical Turk
 Version: 0.1.2
 Date: 2020-06-02
 Authors@R: c(
-    person("Ryden", "Butler", , "r.butler@wustl.edu"),
+    person("Ryden", "Butler", , "r.butler@wustl.edu", role = "aut"),
     person("Binghan", "Zheng", , "zheng.b@wustl.edu", role = "cre")
   )
 Description: Label data in a pairwise comparison framework by
@@ -12,7 +12,7 @@ Description: Label data in a pairwise comparison framework by
 License: GPL (>= 2)
 Depends:
     methods,
-    R (>= 4.0.3)
+    R (<= 4.2.0)
 Imports:
     graphics,
     pyMTurkR,

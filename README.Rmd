@@ -3,8 +3,6 @@ output: github_document
 
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -20,6 +18,7 @@ knitr::opts_chunk$set(
 
 labelR is a package that assists users in conducting data labeling with pairwise comparisons on Amazon's Mechanical Turk (MTurk). This package replicates and extends the functionality of the sentimentIt package (now deprecated) to interface directly with MTurk through R, rather than through the sentimentIt servers. 
 
+
 ## Installation
 <!--
 You can install the released version of labelR from [CRAN](https://CRAN.R-project.org) with:
@@ -32,7 +31,7 @@ You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("RydenButler/labelR")
+devtools::install_github("binghamzhengWU/labelR")
 ```
 ## Tutorial
 

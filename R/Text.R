@@ -4,6 +4,8 @@
 #' required to make an MTurk qualification test and the HTML file used to make
 #' a HIT.
 #'
+#' @docType data
+#' @usage data(Text)
 #' @format A list with 10 elements.
 #' \describe{
 #'   \item{Title}{String. The title of the qualification test.}

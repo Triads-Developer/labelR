@@ -54,7 +54,7 @@ bullet (dash).
 }
 }
 \usage{
-Text
+data(Text)
 }
 \description{
 A list of text objects used by labelR to automatically format the XML files

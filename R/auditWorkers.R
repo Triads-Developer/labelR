@@ -23,6 +23,7 @@
 #'
 #' @rdname auditWorkers
 #' @import 'graphics'
+#' @importFrom Rcpp sourceCpp
 #' @export
 #'
 auditWorkers <- function(current_experiment_results,

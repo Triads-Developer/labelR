@@ -2,10 +2,11 @@ Type: Package
 Package: labelR
 Title: Pairwise Data Labeling with Amazon's Mechanical Turk
 Version: 0.1.2
-Date: 2020-06-02
+Date: 2023-02-06
 Authors@R: c(
     person("Ryden", "Butler", , "r.butler@wustl.edu", role = "aut"),
-    person("Binghan", "Zheng", , "zheng.b@wustl.edu", role = "cre")
+    person("Binghan", "Zheng", ,"zheng.b@wustl.edu", role = "cre"),
+    person("Ju Yeon", "Park", ,"park.juyeon85@gmail.com", role = "aut")
   )
 Description: Label data in a pairwise comparison framework by
     crowdsourcing workers on Amazon's Mechanical Turk platform.
@@ -16,7 +17,9 @@ Depends:
 Imports:
     graphics,
     pyMTurkR,
-    rstan
+    rstan,
+    Rcpp,
+    grDevices
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

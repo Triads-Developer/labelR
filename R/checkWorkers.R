@@ -32,12 +32,17 @@
 #' 
 #' @rdname checkWorkers
 #' @import 'rstan'
-#'
+#' @importFrom Rcpp sourceCpp
+#' @importFrom grDevices dev.off
+#' @importFrom grDevices pdf
+#' @importFrom methods is
+#' 
 #' @export
 checkWorkers <- function(stan_fit, data, cut_point = 1, cut_proportion = 0.9,
                          n.questions = 50, plot_hist = FALSE, hist_path = NULL) {
   requireNamespace("rstan") # bug in rstan - needs explicit call
-  if (class(stan_fit) != "stanfit") {
+  #if (class(stan_fit) != "stanfit") {
+  if (is(stan_fit, "stanfit")) {
     stop("fit should be class stanfit")
   }
 

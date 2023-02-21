@@ -1,8 +1,5 @@
 ---
 output: github_document
-<<<<<<< HEAD
-=======
-
 ---
 >>>>>>> origin
 

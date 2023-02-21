@@ -44,12 +44,6 @@ identifying workers who are unreliable.
 Reference Paper: Carlson, David and Jacob M. Montgomery. Forthcoming. “A Pairwise Comparison Framework for
 Fast, Flexible, and Reliable Human Coding of Political Texts.” American Political Science Review.
 }
-\examples{
-\dontrun{
-ban_workers <- checkWorkers(stan_fit = fit, data = output)
-}
-
-}
 \author{
 David Carlson
 }

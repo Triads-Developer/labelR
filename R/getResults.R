@@ -34,7 +34,7 @@
 getResults <- function(current_hit_ids,
                        current_document_ids,
                        current_batch_id = 0,
-                       retry = T,
+                       retry = TRUE,
                        retry_in_seconds = 60,
                        hit_categories = c("Document 1", "Document 2")) {
   # convert all hit ids to character

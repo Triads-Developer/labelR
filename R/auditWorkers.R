@@ -29,7 +29,7 @@
 auditWorkers <- function(current_experiment_results,
                          reference_results = NULL,
                          exclude_workers = NULL,
-                         plot_audit = F) {
+                         plot_audit = FALSE) {
   if (is.null(reference_results)) {
     CombinedResults <- current_experiment_results
   } else {

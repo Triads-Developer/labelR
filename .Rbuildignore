@@ -1,3 +1,5 @@
 ^README\.Rmd$
 ^CRAN-SUBMISSION$
 ^cran-comments\.md$
+^labelR\.Rproj$
+^\.Rproj\.user$

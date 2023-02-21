@@ -2,12 +2,12 @@
 #'
 #' @details
 #'
-#' 
+#'
 #'
 #' `fitStan()` function estimates a non-hierarchical Stan model,
-#' 
 #'
-#' Fit a random utility model using Hamiltonian MCMC in Stan with data retrieved from the SentimentIt platform.
+#'
+#' Fit a random utility model using Hamiltonian MCMC in Stan with data passed in.
 #'
 #' Reference Paper: Carlson, David and Jacob M. Montgomery. Forthcoming. “A Pairwise Comparison Framework for
 #' Fast, Flexible, and Reliable Human Coding of Political Texts.” American Political Science Review.
@@ -27,18 +27,13 @@
 #'
 #' @author David Carlson
 #'
-#' @examples
-#' \dontrun{
-#' data(movieReviewOutput)
-#' fit <- fitStan(data = movieReviewOutput) # can alternatively be batch IDs
-#' fit <- fitStan(data = output)
-#' }
-#'
 #' @rdname fitStan
 #' @importFrom Rcpp sourceCpp
 #' @export
-#' 
+#'
 fitStan <- function(data, chains = 3, iter = 2500, seed = 1234, n.cores = 3) {
+
+  options(buildtools.check = function(action) TRUE )
   requireNamespace("rstan") # bug in rstan - needs explicit call
   rstan::rstan_options(auto_write = TRUE)
   options(mc.cores = n.cores)
@@ -105,4 +100,5 @@ y[n] ~ bernoulli(inv_logit(b[j[n]]*(a[g[n]]-a[h[n]])));
   alphaPosts <- cbind(ids, alphas)
 
   return(list("fit" = fit, "alphaPosts" = alphaPosts))
+  on.exit(options(buildtools.check = function(action) FALSE ))
 }

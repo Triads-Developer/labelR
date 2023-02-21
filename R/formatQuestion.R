@@ -32,8 +32,8 @@
 formatQuestion <- function(question_list,
                            question_number,
                            question_prompt,
-                           is_image = F,
-                           test_question = F) {
+                           is_image = FALSE,
+                           test_question = FALSE) {
   is_required <- ifelse(test_question, "true", "false")
   question_type <- ifelse(test_question, "Test", "Example")
   question_abbrev <- ifelse(test_question, "T", "E")

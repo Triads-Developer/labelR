@@ -2,7 +2,7 @@
 #'
 #' @details
 #'
-#' 
+#'
 #' Once you have estimated a Stan model, you can use this to identify workers who are unreliable. You can use the
 #' output from the Stan model, as well as the output from the completed comparisons, to identify unreliable workers.
 #' Use the `checkWorkers()` function to detect these outlying workers. This function returns a vector of IDs
@@ -22,21 +22,18 @@
 #'
 #' @return ban_workers A vector of outlying workers' IDs whose proportion of posterior coefficients below \code{cut_point} is greater than \code{cut_proportion} and who answered more than the number of questions in \code{n.questions}
 #'
-#' @examples
-#' \dontrun{
-#' ban_workers <- checkWorkers(stan_fit = fit, data = output)
-#' }
 #'
 #' @author David Carlson
 #'
-#' 
+#'
 #' @rdname checkWorkers
 #' @import 'rstan'
 #' @importFrom Rcpp sourceCpp
 #' @importFrom grDevices dev.off
 #' @importFrom grDevices pdf
 #' @importFrom methods is
-#' 
+#'
+#'
 #' @export
 checkWorkers <- function(stan_fit, data, cut_point = 1, cut_proportion = 0.9,
                          n.questions = 50, plot_hist = FALSE, hist_path = NULL) {

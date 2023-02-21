@@ -30,18 +30,10 @@ Fit a Stan model with results from MTurk
 \details{
 \code{fitStan()} function estimates a non-hierarchical Stan model,
 
-Fit a random utility model using Hamiltonian MCMC in Stan with data retrieved from the SentimentIt platform.
+Fit a random utility model using Hamiltonian MCMC in Stan with data passed in.
 
 Reference Paper: Carlson, David and Jacob M. Montgomery. Forthcoming. “A Pairwise Comparison Framework for
 Fast, Flexible, and Reliable Human Coding of Political Texts.” American Political Science Review.
-}
-\examples{
-\dontrun{
-data(movieReviewOutput)
-fit <- fitStan(data = movieReviewOutput) # can alternatively be batch IDs
-fit <- fitStan(data = output)
-}
-
 }
 \author{
 David Carlson

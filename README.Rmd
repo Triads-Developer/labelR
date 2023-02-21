@@ -1,5 +1,10 @@
 ---
 output: github_document
+<<<<<<< HEAD
+=======
+
+---
+>>>>>>> origin
 
 ---
 
@@ -18,6 +23,11 @@ knitr::opts_chunk$set(
 
 labelR is a package that assists users in conducting data labeling with pairwise comparisons on Amazon's Mechanical Turk (MTurk). This package replicates and extends the functionality of the sentimentIt package (now deprecated) to interface directly with MTurk through R, rather than through the sentimentIt servers. 
 
+This package was developed as part of research conducted at Washington University of St. Louis by David Carlson and Jacob Montgomery, A Pairwise Comparison Framework for Fast, Flexible, and Reliable Human Coding of Political Texts. 
+The link to access this paper can be found at:
+
+https://www.cambridge.org/core/journals/american-political-science-review/article/abs/pairwise-comparison-framework-for-fast-flexible-and-reliable-human-coding-of-political-texts/017BF6B024228962FDF90B47FD90EF5F
+
 
 ## Installation
 <!--
@@ -31,7 +41,7 @@ You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("binghamzhengWU/labelR")
+devtools::install_github("Triads-Developer/labelR")
 ```
 ## Tutorial
 

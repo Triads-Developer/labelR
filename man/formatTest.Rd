@@ -11,12 +11,12 @@ formatTest(
   question_prompt,
   practice_overview,
   practice_questions,
-  practice_image = F,
+  practice_image = FALSE,
   test_overview,
   test_questions,
-  test_image = F,
+  test_image = FALSE,
   closing_message,
-  save_files = T
+  save_files = TRUE
 )
 }
 \arguments{

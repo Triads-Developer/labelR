@@ -8,8 +8,8 @@ formatQuestion(
   question_list,
   question_number,
   question_prompt,
-  is_image = F,
-  test_question = F
+  is_image = FALSE,
+  test_question = FALSE
 )
 }
 \arguments{

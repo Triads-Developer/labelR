@@ -8,7 +8,7 @@ auditWorkers(
   current_experiment_results,
   reference_results = NULL,
   exclude_workers = NULL,
-  plot_audit = F
+  plot_audit = FALSE
 )
 }
 \arguments{

@@ -18,7 +18,13 @@
 #' unreliable for workers with a low number of total HITs.
 #'
 #' @return A dataframe containing workers' posterior means and HIT frequencies.
-#'
+#' 
+#' @example 
+#' data(movieReviewOutput)
+#' auditWorkers(current_experiment_results = movieReviewOutput, 
+#'             reference_results = NULL,
+#'             exclude_workers = TRUE) 
+#'             
 #' @author Ryden Butler
 #'
 #' @rdname auditWorkers
